@@ -6,17 +6,14 @@ import Footer from './componemts/Footer/Footer';
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="*" element={<Layout />}>
-          <Route index element={<AboutUs />} />
-          <Route path="about" element={<AboutUs />} />
-          <Route path="404" element={<ErrorPage />} />
-          <Route path="*" element={<Navigate to="404" />} />
-        </Route>
-      </Routes>
-      <Footer />
-    </>
+    <Routes>
+      <Route path="*" element={<Layout />}>
+        <Route index element={<AboutUs />} />
+        <Route path="about" element={<AboutUs />} />
+        <Route path="404" element={<ErrorPage />} />
+        <Route path="*" element={<Navigate to="404" />} />
+      </Route>
+    </Routes>
   );
 };
 
