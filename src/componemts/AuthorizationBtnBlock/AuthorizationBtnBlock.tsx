@@ -1,11 +1,7 @@
-import { query, collection, getDocs, where } from 'firebase/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { User } from 'firebase/auth';
-import { auth, db, logout } from '../../firebase';
 import LogoutBtn from './LogoutBtn/LogoutBtn';
-import Register from './RegisterBtn/RegisterBtn';
 import s from './AuthorizationBtnBlock.module.scss';
-import LoginBtn from './LoginBtn/LoginBtn';
+import LinkBtn from '../LinkBtn/LinkBtn';
 
 type PropsType = {
   isUser: User | null | undefined;
@@ -18,7 +14,8 @@ const AuthorizationBtnBlock = ({ isUser }: PropsType) => {
         <LogoutBtn />
       ) : (
         <>
-          <LoginBtn />/<Register />
+          <LinkBtn to="/auth/login" name="login" className={s.login} /> /
+          <LinkBtn to="/auth/register" name="register" className={s.register} />
         </>
       )}
     </div>
