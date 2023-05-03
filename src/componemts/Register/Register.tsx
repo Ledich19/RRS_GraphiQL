@@ -18,7 +18,7 @@ const Register = () => {
 
   useEffect(() => {
     if (loading) return;
-    if (user) navigate('/dashboard');
+    if (user) navigate('/about');
   }, [user, loading, navigate]);
 
   return (

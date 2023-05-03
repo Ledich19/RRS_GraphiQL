@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import './RegisterPage.module.scss';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../../firebase';
@@ -25,7 +25,7 @@ const RegisterPage = () => {
   useEffect(() => {
     if (loading) return;
     if (!user) {
-      navigate('/');
+      //navigate('/');
       return;
     }
     fetchUserName();
@@ -41,6 +41,7 @@ const RegisterPage = () => {
           Logout
         </button>
       </div>
+      <Outlet />
     </div>
   );
 };
