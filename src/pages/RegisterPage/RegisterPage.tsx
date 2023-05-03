@@ -38,7 +38,6 @@ const RegisterPage = () => {
         Logged in as
         <div>{name}</div>
         <div>{user?.email}</div>
-        <LogoutBtn />
       </div>
       <Outlet />
     </div>
