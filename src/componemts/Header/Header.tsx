@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import React from 'react';
 import s from './Header.module.scss';
 import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 const Header: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const Header: React.FC = () => {
         </NavLink>
       </div>
       <Login />
+      <Register />
     </>
   );
 };
