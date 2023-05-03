@@ -3,6 +3,7 @@ import React from 'react';
 import s from './Header.module.scss';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import Reset from '../Reset/Reset';
 
 const Header: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const Header: React.FC = () => {
       </div>
       <Login />
       <Register />
+      <Reset />
     </>
   );
 };
