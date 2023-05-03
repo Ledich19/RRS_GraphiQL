@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom';
+import Authorization from '../../componemts/AuthorizationBlock/Authorization';
 import s from './Welcome.module.scss';
 
 const Welcome = () => {
   return (
     <div className={s.Welcome}>
       <h1>Welcome</h1>
-      <Link to="/auth/login">Login</Link>
-      <Link to="/auth/register">Registration</Link>
+      <Authorization />
     </div>
   );
 };

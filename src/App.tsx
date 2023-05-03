@@ -19,8 +19,8 @@ const App = () => {
           <Route path="reset" element={<Reset />} />
         </Route>
         <Route path="about" element={<AboutUs />} />
-        {/* <Route path="404" element={<ErrorPage />} />
-        <Route path="*" element={<Navigate to="404" />} /> */}
+        <Route path="404" element={<ErrorPage />} />
+        <Route path="*" element={<Navigate to="404" />} />
       </Route>
     </Routes>
   );

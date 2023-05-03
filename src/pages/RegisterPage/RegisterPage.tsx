@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import './RegisterPage.module.scss';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../../firebase';
-import LogoutBtn from '../../componemts/LogoutBtn/LogoutBtn';
+import LogoutBtn from '../../componemts/AuthorizationBlock/LogoutBtn/LogoutBtn';
 
 const RegisterPage = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -31,7 +31,7 @@ const RegisterPage = () => {
     }
     fetchUserName();
   }, [user, loading, fetchUserName, navigate]);
-
+  
   return (
     <div className="RegisterPage">
       <div className="RegisterPage__container">

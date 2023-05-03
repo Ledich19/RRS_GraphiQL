@@ -1,4 +1,4 @@
-import LogoutBtn from '../../componemts/LogoutBtn/LogoutBtn';
+import LogoutBtn from '../../componemts/AuthorizationBlock/LogoutBtn/LogoutBtn';
 import s from './AboutUs.module.scss';
 
 const AboutUs = () => {

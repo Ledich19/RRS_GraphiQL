@@ -1,4 +1,4 @@
-import { logout } from '../../firebase';
+import { logout } from '../../../firebase';
 import s from './LogoutBtn.module.scss';
 
 const LogoutBtn = () => {
