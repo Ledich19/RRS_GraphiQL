@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import './RegisterPage.module.scss';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../../firebase';
+import LogoutBtn from '../../componemts/LogoutBtn/LogoutBtn';
 
 const RegisterPage = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -37,9 +38,7 @@ const RegisterPage = () => {
         Logged in as
         <div>{name}</div>
         <div>{user?.email}</div>
-        <button type="button" className="RegisterPage__btn" onClick={logout}>
-          Logout
-        </button>
+        <LogoutBtn />
       </div>
       <Outlet />
     </div>
