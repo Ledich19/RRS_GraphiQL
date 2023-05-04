@@ -8,10 +8,7 @@ const Header: React.FC = () => {
       <NavLink to="/" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
         Home
       </NavLink>
-      <NavLink to="/blank" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
-        Add book
-      </NavLink>
-      <NavLink to="/about" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
+      <NavLink to="/app" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
         About us
       </NavLink>
     </div>
