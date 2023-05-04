@@ -1,9 +1,9 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db, logout } from '../../firebase';
-import Authorization from '../../componemts/AuthorizationBtnBlock/AuthorizationBtnBlock';
+import Authorization from '../../components/AuthorizationBtnBlock/AuthorizationBtnBlock';
 import s from './Welcome.module.scss';
-import UserInfo from '../../componemts/UserInfo/UserInfo';
-import LinkBtn from '../../componemts/LinkBtn/LinkBtn';
+import UserInfo from '../../components/UserInfo/UserInfo';
+import LinkBtn from '../../components/LinkBtn/LinkBtn';
 
 const Welcome = () => {
   const [user, loading, error] = useAuthState(auth);
