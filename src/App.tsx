@@ -1,11 +1,11 @@
-import { Outlet, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ErrorPage from './pages/Page404/Page404';
 import Layout from './pages/Layout/Layout';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Welcome from './pages/Welcome/Welcome';
-import Login from './componemts/Login/Login';
-import Register from './componemts/Register/Register';
-import Reset from './componemts/Reset/Reset';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import Reset from './components/Reset/Reset';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 
 const App = () => {
