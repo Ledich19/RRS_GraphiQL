@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { auth, db, logout } from '../../firebase';
+import { auth } from '../../app/firebase';
 import s from './RegisterPage.module.scss';
 
 const RegisterPage = () => {

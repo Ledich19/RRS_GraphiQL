@@ -1,5 +1,5 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db, logout } from '../../firebase';
+import { auth } from '../../app/firebase';
 import Authorization from '../../components/AuthorizationBtnBlock/AuthorizationBtnBlock';
 import s from './Welcome.module.scss';
 import UserInfo from '../../components/UserInfo/UserInfo';

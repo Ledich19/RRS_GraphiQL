@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../firebase';
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../app/firebase';
 import s from './Login.module.scss';
 import LinkBtn from '../LinkBtn/LinkBtn';
 
@@ -47,11 +47,11 @@ const Login = () => {
         Login with Google
       </button>
       <div>
-        <LinkBtn to="/reset" name="Forgot Password" className={s.forgotBtn} />
+        <LinkBtn to="/auth/reset" name="Forgot Password" className={s.forgotBtn} />
       </div>
       <div>
         Don&apos;t have an account?{' '}
-        <LinkBtn to="/register" name="Register" className={s.register} />
+        <LinkBtn to="/auth/register" name="Register" className={s.register} />
         now.
       </div>
     </div>
