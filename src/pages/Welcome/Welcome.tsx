@@ -6,7 +6,7 @@ import UserInfo from '../../componemts/UserInfo/UserInfo';
 import LinkBtn from '../../componemts/LinkBtn/LinkBtn';
 
 const Welcome = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   return (
     <div className={s.Welcome}>

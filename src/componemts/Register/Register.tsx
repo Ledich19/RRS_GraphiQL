@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../app/firebase';
 import s from './Register.module.scss';
 import LinkBtn from '../LinkBtn/LinkBtn';
+import useSetNotify from '../../hooks/useSetNotify';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -11,9 +12,10 @@ const Register = () => {
   const [name, setName] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
+  const notify = useSetNotify(5000);
 
   const register = () => {
-    if (!name) alert('Please enter name');
+    if (!name) notify({ type: 'error', text: 'Please enter name' });
     registerWithEmailAndPassword(name, email, password);
   };
 
@@ -24,6 +26,7 @@ const Register = () => {
 
   return (
     <div className={s.register}>
+      <div className={s.error}>{error ? error.message : ''}</div>
       <input
         type="text"
         className={s.textBox}

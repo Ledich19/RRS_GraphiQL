@@ -22,6 +22,7 @@ const Login = () => {
 
   return (
     <div className={s.login}>
+      <div className={s.error}>{error ? error.message : ''}</div>
       <input
         type="text"
         className={s.email}
