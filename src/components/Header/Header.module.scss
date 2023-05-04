@@ -16,7 +16,11 @@
 
   }
   &__lang{
-
+    cursor: pointer;
+    max-width: 24px;
+  }
+  &__iconLang{
+    width: 100%;
   }
   &__user{
     max-width: 120px;

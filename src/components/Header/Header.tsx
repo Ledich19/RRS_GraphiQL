@@ -1,17 +1,28 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../app/firebase';
 import Authorization from '../AuthorizationBtnBlock/AuthorizationBtnBlock';
 import HeaderNavigation from './HeaderNavigation/HeaderNavigation';
+import uaFlag from '../../../public/img/ua-flag.png';
+import usaFlag from '../../../public/img/usa-flag.png';
 import s from './Header.module.scss';
 
 const Header: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [lang, setLang] = useState(usaFlag);
+  const handleLanguage = () => {
+    if (lang === usaFlag) setLang(uaFlag);
+    else setLang(usaFlag);
+  };
   return (
     <header className={s.header}>
       <div className={s.header__container}>
         <HeaderNavigation />
-        <div className={s.header__lang}>language: en</div>
+        <div className={s.header__lang} onClick={handleLanguage}>
+          <img className={s.header__iconLang} src={lang} alt="language" />
+        </div>
         <div className={s.header__user}>
           <Authorization isUser={user} />
         </div>
