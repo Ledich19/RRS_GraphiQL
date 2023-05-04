@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { query, collection, getDocs, where } from 'firebase/firestore';
-import { auth, db, logout } from '../../firebase';
+import { auth, db } from '../../app/firebase';
 import s from './UserInfo.module.scss';
 
 const UserInfo = () => {

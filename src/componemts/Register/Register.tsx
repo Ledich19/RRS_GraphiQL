@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../firebase';
+import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../app/firebase';
 import s from './Register.module.scss';
 import LinkBtn from '../LinkBtn/LinkBtn';
 

@@ -1,7 +1,7 @@
-import { useNavigate, Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, sendPasswordReset } from '../../firebase';
+import { auth, sendPasswordReset } from '../../app/firebase';
 import s from './Reset.module.scss';
 import LinkBtn from '../LinkBtn/LinkBtn';
 
