@@ -6,28 +6,32 @@
 
   }
   &__navigation{
-
   }
   &__list{
-    
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  &__item{
+
   }
   &__lang{
 
   }
   &__user{
-
+    max-width: 120px;
+  }
+}
+.navLink, .activeLink{
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: #00ff15;
   }
 }
 .navLink {
   color: rgb(133, 133, 133);
-  &:hover {
-    color: #717171;
-  }
 }
 .activeLink {
   color: #0acc00;
-  &:hover {
-    color: #04ec17;
-  }
-  
 }
