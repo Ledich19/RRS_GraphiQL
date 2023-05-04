@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../firebase';
 import s from './Register.module.scss';
+import LinkBtn from '../LinkBtn/LinkBtn';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -22,39 +23,38 @@ const Register = () => {
   }, [user, loading, navigate]);
 
   return (
-    <div className="register">
-      <div className="register__container">
-        <input
-          type="text"
-          className="register__textBox"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-        />
-        <input
-          type="text"
-          className="register__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
-          type="password"
-          className="register__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="button" className="register__btn" onClick={register}>
-          Register
-        </button>
-        <button type="button" className="register__btn register__google" onClick={signInWithGoogle}>
-          Register with Google
-        </button>
+    <div className={s.register}>
+      <input
+        type="text"
+        className={s.textBox}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Full Name"
+      />
+      <input
+        type="text"
+        className={s.textBox}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="E-mail Address"
+      />
+      <input
+        type="password"
+        className={s.textBox}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="button" className={s.registerBtn} onClick={register}>
+        Register
+      </button>
+      <button type="button" className={s.registerGoogle} onClick={signInWithGoogle}>
+        Register with Google
+      </button>
 
-        <div>
-          Already have an account? <Link to="/">Login</Link> now.
-        </div>
+      <div>
+        Already have an account?
+        <LinkBtn to="/auth/login" name="Login" className={s.login} />
       </div>
     </div>
   );

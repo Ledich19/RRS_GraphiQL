@@ -47,11 +47,11 @@ const Login = () => {
         Login with Google
       </button>
       <div>
-        <LinkBtn to="/reset" name="Forgot Password" className={s.forgotBtn} />
+        <LinkBtn to="/auth/reset" name="Forgot Password" className={s.forgotBtn} />
       </div>
       <div>
         Don&apos;t have an account?{' '}
-        <LinkBtn to="/register" name="Register" className={s.register} />
+        <LinkBtn to="/auth/register" name="Register" className={s.register} />
         now.
       </div>
     </div>
