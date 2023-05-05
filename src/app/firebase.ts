@@ -40,7 +40,7 @@ const signInWithGoogle = async () => {
     }
   } catch (err) {
     if (err instanceof Error) {
-      alert(err.message);
+      throw Error(err.message);
     }
   }
 };
@@ -50,7 +50,7 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     if (err instanceof Error) {
-      alert(err.message);
+      throw Error(err.message);
     }
   }
 };
@@ -67,7 +67,7 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
     });
   } catch (err) {
     if (err instanceof Error) {
-      alert(err.message);
+      throw Error(err.message);
     }
   }
 };
@@ -75,10 +75,10 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
 const sendPasswordReset = async (email: string) => {
   try {
     await sendPasswordResetEmail(auth, email);
-    alert('Password reset link sent!');
+    throw Error('Password reset link sent!');
   } catch (err) {
     if (err instanceof Error) {
-      alert(err.message);
+      throw Error(err.message);
     }
   }
 };

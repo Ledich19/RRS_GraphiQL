@@ -5,7 +5,7 @@ import { auth } from '../../app/firebase';
 import s from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -15,6 +15,7 @@ const Reset = () => {
   }, [user, loading, navigate]);
   return (
     <div className={s.reset}>
+      <div className={s.error}>{error ? error.message : ''}</div>
       <input
         type="text"
         className={s.textBox}
