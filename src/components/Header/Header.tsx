@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useTranslation } from 'react-i18next';
 import { auth } from '../../app/firebase';
 import Authorization from '../AuthorizationBtnBlock/AuthorizationBtnBlock';
 import HeaderNavigation from './HeaderNavigation/HeaderNavigation';
@@ -16,11 +17,7 @@ const Header: React.FC = () => {
   const [lang, setLang] = useState(usaFlag);
   const [header, setHeader] = useState(false);
   const [showLangs, setShowLangs] = useState(false);
-
-  // const handleLanguage = () => {
-  //   if (lang === usaFlag) setLang(uaFlag);
-  //   else setLang(usaFlag);
-  // };
+  const { t, i18n } = useTranslation();
 
   const handleHeaderClass = () => {
     if (window.scrollY >= 50) setHeader(true);
@@ -51,6 +48,7 @@ const Header: React.FC = () => {
             onClick={() => {
               hideBoxLanguages();
               setLang(usaFlag);
+              i18n.changeLanguage('en');
             }}
           />
           <img
@@ -60,6 +58,7 @@ const Header: React.FC = () => {
             onClick={() => {
               hideBoxLanguages();
               setLang(uaFlag);
+              i18n.changeLanguage('ua');
             }}
           />
           <img
@@ -69,6 +68,7 @@ const Header: React.FC = () => {
             onClick={() => {
               hideBoxLanguages();
               setLang(ruFlag);
+              i18n.changeLanguage('ru');
             }}
           />
         </div>
