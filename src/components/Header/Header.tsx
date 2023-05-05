@@ -5,8 +5,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../app/firebase';
 import Authorization from '../AuthorizationBtnBlock/AuthorizationBtnBlock';
 import HeaderNavigation from './HeaderNavigation/HeaderNavigation';
-import uaFlag from '../../../public/img/ua-flag.png';
-import usaFlag from '../../../public/img/usa-flag.png';
+import uaFlag from '../../assets/ua-flag.png';
+import usaFlag from '../../assets/usa-flag.png';
 import s from './Header.module.scss';
 
 const Header: React.FC = () => {
