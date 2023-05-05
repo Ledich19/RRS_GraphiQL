@@ -5,6 +5,7 @@ const AboutUs = () => {
     <div className={s.aboutUs}>
       <h1>About Us</h1>
       <p>AboutUs AboutUs AboutUs</p>
+      <div className={s.test}>SECTION FOR ADD SCROLL ON PAGE</div>
     </div>
   );
 };
