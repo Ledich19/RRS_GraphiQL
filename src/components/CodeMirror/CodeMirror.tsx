@@ -16,7 +16,7 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, area
   const editorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (editorRef.current === null) return;
+    if (editorRef.current === null) return undefined;
     const state = EditorState.create({
       doc,
       extensions: [
@@ -62,7 +62,7 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, area
       view.destroy();
       setView(null);
     };
-  }, [editorRef.current, doc]);
+  }, [editorRef.current, doc, areaHeight]);
   return <section ref={editorRef} className={style.codemirror} />;
 };
 
