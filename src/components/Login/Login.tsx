@@ -4,13 +4,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../app/firebase';
 import s from './Login.module.scss';
 import LinkBtn from '../LinkBtn/LinkBtn';
-import useInput from '../../hooks/useInput';
 
 const Login = () => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  const email = useInput();
-  const password = useInput();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
@@ -29,23 +26,21 @@ const Login = () => {
       <input
         type="text"
         className={s.email}
-        value={email.value}
-        onChange={(e) => email.onChange(e)}
-        onBlur={(e) => email.onBlur(e)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="E-mail Address"
       />
       <input
         type="password"
         className={s.password}
-        value={password.value}
-        onChange={(e) => password.onChange(e)}
-        onBlur={(e) => password.onBlur(e)}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
       <button
         type="button"
         className={s.loginBtn}
-        onClick={() => logInWithEmailAndPassword(email.value || '', password.value || '')}
+        onClick={() => logInWithEmailAndPassword(email, password)}
       >
         Login
       </button>
