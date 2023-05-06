@@ -1,3 +1,20 @@
 {
-  "home": "Головна"
+  "home": "Головна",
+  "editor": "Редактор",
+  "login": "Увійти",
+  "register": "Реєстрація",
+  "logout": "Вийти",
+  "start": "Розпочати",
+  "welcome": "Ласкаво просимо",
+  "about": "Про нас",
+  "emailAdress": "Адреса електронної пошти",
+  "password": "Пароль",
+  "loginWith": "Увійти за подомогою Google",
+  "forgotPassword": "Забули пароль",
+  "dontHaveAccount": "Не маєте облікового запису?",
+  "now": "зараз",
+  "loggedInAs": "Увійшов як",
+  "fullName": "Повне ім'я",
+  "haveAccount": "У вас уже є обліковий запис?",
+  "registerWith": "Реєстрація за допомогою Google"
 }

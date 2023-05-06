@@ -1,3 +1,20 @@
 {
-  "home": "Главная"
+  "home": "Главная",
+  "editor": "Редактор",
+  "login": "Войти",
+  "register": "Регистрация",
+  "logout": "Выйти",
+  "start": "Начать",
+  "welcome": "Добро пожаловать",
+  "about": "О нас",
+  "emailAdress": "Адрес электронной почты",
+  "password": "Пароль",
+  "loginWith": "Войти с помощью Google",
+  "forgotPassword": "Забыли пароль",
+  "dontHaveAccount": "У вас нет аккаунта?",
+  "now": "сейчас",
+  "loggedInAs": "Зашёл как",
+  "fullName": "Полное имя",
+  "haveAccount": "Уже есть аккаунт?",
+  "registerWith": "Регистрация с помощью Google"
 }

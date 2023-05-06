@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import s from '../Header.module.scss';
 
 const HeaderNavigation: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <nav className={s.header__navigation}>
       <ul className={s.header__list}>
@@ -15,7 +15,7 @@ const HeaderNavigation: React.FC = () => {
         </li>
         <li className={s.header__item}>
           <NavLink to="/app" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
-            Editor
+            {t('editor')}
           </NavLink>
         </li>
       </ul>

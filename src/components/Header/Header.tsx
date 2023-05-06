@@ -13,11 +13,11 @@ import ruFlag from '../../assets/ru-flag.png';
 import s from './Header.module.scss';
 
 const Header: React.FC = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [lang, setLang] = useState(usaFlag);
   const [header, setHeader] = useState(false);
   const [showLangs, setShowLangs] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleHeaderClass = () => {
     if (window.scrollY >= 50) setHeader(true);
