@@ -9,7 +9,7 @@ const Welcome = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div className={s.Welcome}>
+    <div className={s.welcome}>
       <UserInfo />
       <h1>Welcome</h1>
       <Authorization isUser={user} />

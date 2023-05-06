@@ -14,7 +14,7 @@ const AuthorizationBtnBlock = ({ isUser }: PropsType) => {
         <LogoutBtn />
       ) : (
         <>
-          <LinkBtn to="/auth/login" name="login" className={s.login} /> /
+          <LinkBtn to="/auth/login" name="login" className={s.login} /> /&nbsp;
           <LinkBtn to="/auth/register" name="register" className={s.register} />
         </>
       )}
