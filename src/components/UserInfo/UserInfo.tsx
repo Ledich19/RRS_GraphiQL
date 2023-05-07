@@ -2,6 +2,7 @@ import { decodeToken } from 'react-jwt';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../../app/firebase';
 import s from './UserInfo.module.scss';
@@ -12,6 +13,7 @@ const UserInfo = () => {
   const [name, setName] = useState('');
   const notify = useSetNotify(5000);
   const navigate = useNavigate();
+
   interface DecodedToken {
     exp: number;
   }
@@ -45,6 +47,8 @@ const UserInfo = () => {
     }
   }, [user, loading, navigate]);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (loading) return;
     const fetchUserName = async () => {
@@ -64,7 +68,7 @@ const UserInfo = () => {
     <div className={s.userInfo}>
       {user && !error ? (
         <div>
-          Logged in as
+          {t('loggedInAs')}
           <div className={s.name}>{name}</div>
           <div className={s.email}>{user?.email}</div>
         </div>
