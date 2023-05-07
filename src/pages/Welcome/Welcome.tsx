@@ -1,4 +1,5 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useTranslation } from 'react-i18next';
 import { auth } from '../../app/firebase';
 import Authorization from '../../components/AuthorizationBtnBlock/AuthorizationBtnBlock';
 import s from './Welcome.module.scss';
@@ -7,13 +8,13 @@ import LinkBtn from '../../components/LinkBtn/LinkBtn';
 
 const Welcome = () => {
   const [user] = useAuthState(auth);
-
+  const { t, i18n } = useTranslation();
   return (
     <div className={s.welcome}>
       <UserInfo />
-      <h1>Welcome</h1>
+      <h1>{t('welcome')}</h1>
       <Authorization isUser={user} />
-      {!user || <LinkBtn to="/app" name="Start" className={s.button} />}
+      {!user || <LinkBtn to="/app" name={t('start')} className={s.button} />}
     </div>
   );
 };

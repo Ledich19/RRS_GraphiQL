@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../app/firebase';
@@ -11,7 +12,7 @@ const Login = () => {
 
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -28,32 +29,32 @@ const Login = () => {
         className={s.email}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="E-mail Address"
+        placeholder={t('emailAdress')}
       />
       <input
         type="password"
         className={s.password}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
+        placeholder={t('password')}
       />
       <button
         type="button"
         className={s.loginBtn}
         onClick={() => logInWithEmailAndPassword(email, password)}
       >
-        Login
+        {t('login')}
       </button>
       <button type="button" className={s.loginGoogle} onClick={signInWithGoogle}>
-        Login with Google
+        {t('loginWith')}
       </button>
       <div>
-        <LinkBtn to="/auth/reset" name="Forgot Password" className={s.forgotBtn} />
+        <LinkBtn to="/auth/reset" name={t('forgotPassword')} className={s.forgotBtn} />
       </div>
       <div>
-        Don&apos;t have an account?{' '}
-        <LinkBtn to="/auth/register" name="Register" className={s.register} />
-        now.
+        {t('dontHaveAccount')}{' '}
+        <LinkBtn to="/auth/register" name={t('register')} className={s.register} />
+        {t('now')}
       </div>
     </div>
   );

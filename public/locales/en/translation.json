@@ -1,0 +1,20 @@
+{
+  "home": "Home",
+  "editor": "Editor",
+  "login": "Login",
+  "register": "Register",
+  "logout": "Logout",
+  "start": "Start",
+  "welcome": "Welcome",
+  "about": "About us",
+  "emailAdress": "E-mail Address",
+  "password": "Password",
+  "loginWith": "Login with Google",
+  "forgotPassword": "Forgot password",
+  "dontHaveAccount": "Don't have an account?",
+  "now": "now",
+  "loggedInAs": "Logged in as",
+  "fullName": "Full name",
+  "haveAccount": "Already have an account?",
+  "registerWith": "Register with Google"
+}

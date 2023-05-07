@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useTranslation } from 'react-i18next';
 import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../app/firebase';
 import s from './Register.module.scss';
 import LinkBtn from '../LinkBtn/LinkBtn';
@@ -11,6 +12,7 @@ const Register = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const notify = useSetNotify(5000);
+  const { t } = useTranslation();
 
   const email = useInput('', {
     isEmpty: true,
@@ -68,6 +70,7 @@ const Register = () => {
       <input
         type="password"
         className={s.textBox}
+
         value={password.value}
         onChange={(e) => password.onChange(e)}
         onBlur={() => password.onBlur()}
@@ -82,12 +85,12 @@ const Register = () => {
         Register
       </button>
       <button type="button" className={s.registerGoogle} onClick={signInWithGoogle}>
-        Register with Google
+        {t('registerWith')}
       </button>
 
       <div>
-        Already have an account?
-        <LinkBtn to="/auth/login" name="Login" className={s.login} />
+        {t('haveAccount')}
+        <LinkBtn to="/auth/login" name={t('login')} className={s.login} />
       </div>
     </div>
   );

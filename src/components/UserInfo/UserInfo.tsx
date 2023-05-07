@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { query, collection, getDocs, where } from 'firebase/firestore';
+import { useTranslation } from 'react-i18next';
 import { auth, db } from '../../app/firebase';
 import s from './UserInfo.module.scss';
 import useSetNotify from '../../hooks/useSetNotify';
@@ -11,6 +12,7 @@ const UserInfo = () => {
   const [name, setName] = useState('');
   const notify = useSetNotify(5000);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (loading) return;
@@ -31,7 +33,7 @@ const UserInfo = () => {
     <div className={s.userInfo}>
       {user && !error ? (
         <div>
-          Logged in as
+          {t('loggedInAs')}
           <div className={s.name}>{name}</div>
           <div className={s.email}>{user?.email}</div>
         </div>
