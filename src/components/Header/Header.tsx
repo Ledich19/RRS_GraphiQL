@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../../app/firebase';
@@ -37,15 +37,29 @@ const Header: React.FC = () => {
     dispatch(setVisibilityLangBox(true));
   };
 
+  const headerLangBox = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleVisibility = (e: MouseEvent) => {
+      return (
+        headerLangBox.current?.contains(e.target as HTMLDivElement) ||
+        dispatch(setVisibilityLangBox(false))
+      );
+    };
+    document.addEventListener('click', handleVisibility);
+    return () => document.removeEventListener('click', handleVisibility);
+  }, [dispatch]);
+
   window.addEventListener('scroll', handleHeaderClass);
   return (
     <header className={!header ? s.header : `${s.header} ${s.active}`}>
       <div className={s.header__container}>
         <HeaderNavigation />
-        <div className={s.header__lang} onClick={showBoxLanguages}>
-          <img className={s.header__iconLang} src={lang} alt="current lang" />
+        <div className={s.header__langs} ref={headerLangBox}>
+          <div className={s.header__lang} onClick={showBoxLanguages}>
+            <img className={s.header__iconLang} src={lang} alt="current lang" />
+          </div>
+          <HeaderLangBox />
         </div>
-        <HeaderLangBox />
         <div className={s.header__user}>
           <Authorization isUser={user} />
         </div>

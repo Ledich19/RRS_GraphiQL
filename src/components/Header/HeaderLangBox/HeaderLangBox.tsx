@@ -16,9 +16,14 @@ const HeaderLangBox = () => {
   const { visibilityLangBox } = useSelector(
     (state: { notify: NotifyType; languageOptions: LangState }) => state.languageOptions
   );
-
   return (
-    <div className={s.header__langsBox} style={{ opacity: visibilityLangBox ? '1' : '0' }}>
+    <div
+      className={s.header__langsBox}
+      style={{
+        opacity: visibilityLangBox ? '1' : '0',
+        visibility: visibilityLangBox ? 'visible' : 'hidden',
+      }}
+    >
       <img
         className={s.header__iconLang}
         src={usaFlag}
