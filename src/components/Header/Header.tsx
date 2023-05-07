@@ -1,23 +1,45 @@
-import { NavLink } from 'react-router-dom';
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../app/firebase';
+import Authorization from '../AuthorizationBtnBlock/AuthorizationBtnBlock';
+import HeaderNavigation from './HeaderNavigation/HeaderNavigation';
+import uaFlag from '../../../public/img/ua-flag.png';
+import usaFlag from '../../../public/img/usa-flag.png';
 import s from './Header.module.scss';
 
 const Header: React.FC = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const [lang, setLang] = useState(usaFlag);
+  const [header, setHeader] = useState(false);
+
+  const handleLanguage = () => {
+    if (lang === usaFlag) setLang(uaFlag);
+    else setLang(usaFlag);
+  };
+
+  const handleHeaderClass = () => {
+    if (window.scrollY >= 50) setHeader(true);
+    else setHeader(false);
+  };
+
+  window.addEventListener('scroll', handleHeaderClass);
   return (
-    <div className={s.header}>
-      <NavLink to="/" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
-        Home
-      </NavLink>
-      <NavLink to="/editor" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
-        Editor
-      </NavLink>
-      <NavLink to="/blank" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
-        Add book
-      </NavLink>
-      <NavLink to="/about" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
-        About us
-      </NavLink>
-    </div>
+    <header
+      className={!header ? s.header : `${s.header} ${s.active}`}
+      // style={{ backgroundColor: !header ? 'rgb(155, 157, 155)' : 'rgb(101, 101, 101)' }}
+    >
+      <div className={s.header__container}>
+        <HeaderNavigation />
+        <div className={s.header__lang} onClick={handleLanguage}>
+          <img className={s.header__iconLang} src={lang} alt="language" />
+        </div>
+        <div className={s.header__user}>
+          <Authorization isUser={user} />
+        </div>
+      </div>
+    </header>
   );
 };
 

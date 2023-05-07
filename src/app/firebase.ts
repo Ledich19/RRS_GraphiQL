@@ -1,0 +1,98 @@
+import { initializeApp } from 'firebase/app';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from 'firebase/auth';
+import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebase/firestore';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDOvb93X-SuTAlxu6QAi4ZO-CXfwsYjcZY',
+  authDomain: 'graphiql-73480.firebaseapp.com',
+  projectId: 'graphiql-73480',
+  storageBucket: 'graphiql-73480.appspot.com',
+  messagingSenderId: '534941991618',
+  appId: '1:534941991618:web:23664a8e8c7155aee5315b',
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const googleProvider = new GoogleAuthProvider();
+const signInWithGoogle = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider);
+    const { user } = res;
+    const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+    const docs = await getDocs(q);
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, 'users'), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: 'google',
+        email: user.email,
+      });
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      throw Error(err.message);
+    }
+  }
+};
+
+const logInWithEmailAndPassword = async (email: string, password: string) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    if (err instanceof Error) {
+      throw Error(err.message);
+    }
+  }
+};
+
+const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const { user } = res;
+    await addDoc(collection(db, 'users'), {
+      uid: user.uid,
+      name,
+      authProvider: 'local',
+      email,
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      throw Error(err.message);
+    }
+  }
+};
+
+const sendPasswordReset = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    throw Error('Password reset link sent!');
+  } catch (err) {
+    if (err instanceof Error) {
+      throw Error(err.message);
+    }
+  }
+};
+
+const logout = () => {
+  signOut(auth);
+};
+
+export {
+  auth,
+  db,
+  signInWithGoogle,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  sendPasswordReset,
+  logout,
+};
