@@ -26,10 +26,7 @@ const Header: React.FC = () => {
 
   window.addEventListener('scroll', handleHeaderClass);
   return (
-    <header
-      className={!header ? s.header : `${s.header} ${s.active}`}
-      // style={{ backgroundColor: !header ? 'rgb(155, 157, 155)' : 'rgb(101, 101, 101)' }}
-    >
+    <header className={!header ? s.header : `${s.header} ${s.active}`}>
       <div className={s.header__container}>
         <HeaderNavigation />
         <div className={s.header__lang} onClick={handleLanguage}>
