@@ -1,6 +1,6 @@
-import { useJwt, isExpired, decodeToken } from 'react-jwt';
+import { decodeToken } from 'react-jwt';
 import { useEffect, useState } from 'react';
-import { useAuthState, useIdToken } from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../../app/firebase';
@@ -19,7 +19,7 @@ const UserInfo = () => {
   useEffect(() => {
     let timeoutID: NodeJS.Timer;
 
-    const getTocen = async () => {
+    const getToken = async () => {
       const token = await auth.currentUser?.getIdToken();
       if (token) {
         const { exp } = decodeToken(token) as DecodedToken;
@@ -28,10 +28,10 @@ const UserInfo = () => {
             logout();
             navigate('/');
           }
-        }, 30000);
+        }, 5000);
       }
     };
-    getTocen();
+    getToken();
 
     return () => {
       window.clearTimeout(timeoutID);
