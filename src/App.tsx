@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import ErrorPage from './pages/Page404/Page404';
 import Layout from './pages/Layout/Layout';
 import AboutUs from './pages/AboutUs/AboutUs';
+import Editor from './pages/Editor/Editor';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
@@ -18,7 +19,7 @@ const App = () => {
           <Route path="register" element={<Register />} />
           <Route path="reset" element={<Reset />} />
         </Route>
-        <Route path="app" element={<AboutUs />} />
+        <Route path="editor" element={<Editor />} />
         <Route path="404" element={<ErrorPage />} />
         <Route path="*" element={<Navigate to="404" />} />
       </Route>
