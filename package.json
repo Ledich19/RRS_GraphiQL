@@ -11,8 +11,14 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
+    "@codemirror/commands": "^6.2.4",
+    "@codemirror/state": "^6.2.0",
+    "@codemirror/view": "^6.11.0",
+    "cm6-graphql": "^0.0.5",
+    "codemirror": "^6.0.1",
     "eslint-plugin": "^1.0.1",
+    "graphql": "^16.6.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "firebase": "^9.21.0",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
