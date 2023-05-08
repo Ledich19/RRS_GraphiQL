@@ -14,7 +14,7 @@ const HeaderNavigation: React.FC = () => {
           </NavLink>
         </li>
         <li className={s.header__item}>
-          <NavLink to="/app" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
+          <NavLink to="/editor" className={(info) => (info.isActive ? s.activeLink : s.navLink)}>
             {t('editor')}
           </NavLink>
         </li>
