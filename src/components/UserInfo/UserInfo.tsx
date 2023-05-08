@@ -1,9 +1,10 @@
+import { decodeToken } from 'react-jwt';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
-import { query, collection, getDocs, where } from 'firebase/firestore';
 import { useTranslation } from 'react-i18next';
-import { auth, db } from '../../app/firebase';
+import { query, collection, getDocs, where } from 'firebase/firestore';
+import { auth, db, logout } from '../../app/firebase';
 import s from './UserInfo.module.scss';
 import useSetNotify from '../../hooks/useSetNotify';
 
@@ -12,6 +13,40 @@ const UserInfo = () => {
   const [name, setName] = useState('');
   const notify = useSetNotify(5000);
   const navigate = useNavigate();
+
+  interface DecodedToken {
+    exp: number;
+  }
+
+  useEffect(() => {
+    let timeoutID: NodeJS.Timer;
+
+    const getToken = async () => {
+      const token = await auth.currentUser?.getIdToken();
+      if (token) {
+        const { exp } = decodeToken(token) as DecodedToken;
+        timeoutID = setInterval(() => {
+          if (Math.floor(Date.now() / 1000) >= exp) {
+            logout();
+            navigate('/');
+          }
+        }, 5000);
+      }
+    };
+    getToken();
+
+    return () => {
+      window.clearTimeout(timeoutID);
+    };
+  }, [user, loading, navigate]);
+
+  useEffect(() => {
+    if (loading) return;
+    if (user) {
+      navigate('/');
+    }
+  }, [user, loading, navigate]);
+
   const { t } = useTranslation();
 
   useEffect(() => {
