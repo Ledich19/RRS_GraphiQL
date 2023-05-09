@@ -15,10 +15,11 @@ const Editor: React.FC = () => {
   async function handleSubmit() {
     if (mainEditorState?.state.doc.toString()) {
       const query = mainEditorState.state.doc.toString();
+      const variables = variablesEditorState?.state.doc.toString();
       console.log(query);
       try {
         setIsLoading(true);
-        const response = await getData(query);
+        const response = await getData(query, variables);
         setResult(response);
         console.log(response);
         setIsLoading(false);

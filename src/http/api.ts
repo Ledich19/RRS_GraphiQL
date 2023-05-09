@@ -8,7 +8,7 @@ async function getData(query: string, variables = '', headers?: string) {
     },
     body: JSON.stringify({
       query,
-      variables: variables ? JSON.parse(variables) : {},
+      variables,
     }),
   });
   return response.json();
