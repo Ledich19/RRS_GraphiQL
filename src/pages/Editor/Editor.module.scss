@@ -11,12 +11,31 @@
 }
 .button {
   padding: 5px 10px;
+  min-width: 110px;
   background: #045;
   color: #fff;
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
 }
+.nonActiveButton, .activeButton{
+  padding: 5px 10px;
+  min-width: 110px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+.nonActiveButton{
+  color: #045;
+  border: 2px solid #045;
+}
+.activeButton {
+  background: #045;
+  color: #fff;
+}
+
 .title {
   margin: 0.5rem 0 0;
   text-align: center;
@@ -38,4 +57,13 @@
   flex-basis: 0;
   overflow: hidden;
   transform: scaleX(0);
+}
+.additional{
+  position: relative;
+  &__buttons{
+    margin-top: 10px;
+  }
+}
+.additional > section {
+
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, { useEffect, useRef } from 'react';
 import { basicSetup } from 'codemirror';
 import { graphql } from 'cm6-graphql';
@@ -13,9 +14,18 @@ interface CodeMirrorProps {
   initialCode: string;
   areaHeight: string;
   main: boolean;
+  title?: string;
+  active?: boolean;
 }
 
-const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, areaHeight, main }) => {
+const CodeMirror: React.FC<CodeMirrorProps> = ({
+  setView,
+  initialCode: doc,
+  areaHeight,
+  main,
+  title,
+  active,
+}) => {
   const editorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -72,7 +82,15 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, area
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorRef.current, doc, areaHeight]);
-  return <section ref={editorRef} className={style.codemirror} />;
+  return (
+    <section
+      ref={editorRef}
+      className={style.codemirror}
+      style={{ display: active ? 'block' : 'none' }}
+    >
+      <h3 className={style.title}>{title}</h3>
+    </section>
+  );
 };
 
 export default CodeMirror;
