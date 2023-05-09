@@ -11,7 +11,12 @@ const Editor: React.FC = () => {
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState({});
+  const [docsIsOpen, setDocsIsOpen] = useState(false);
 
+  function handleDocs() {
+    if (docsIsOpen) setDocsIsOpen(false);
+    else setDocsIsOpen(true);
+  }
   async function handleSubmit() {
     if (mainEditorState?.state.doc.toString()) {
       const query = mainEditorState.state.doc.toString();
@@ -46,8 +51,8 @@ const Editor: React.FC = () => {
 
   return (
     <div className={style.editor}>
-      <div className={style.row}>
-        <div>
+      <div className={style.buttons}>
+        <div className={style.editorNavigation}>
           <button type="button" className={style.button} onClick={handleReset}>
             Reset
           </button>
@@ -55,32 +60,45 @@ const Editor: React.FC = () => {
             Submit
           </button>
         </div>
-        <h3 className={style.title}>Code editor</h3>
-        <CodeMirror
-          setView={setMainEditorState}
-          initialCode={mainEditorState?.state.doc.toString() || ''}
-          areaHeight="400px"
-          main
-        />
-        <h3 className={style.title}>Variables</h3>
-        <CodeMirror
-          setView={setVariablesEditorState}
-          initialCode={variablesEditorState?.state.doc.toString() || ''}
-          areaHeight="100px"
-          main={false}
-        />
-        <h3 className={style.title}>Headers</h3>
-        <CodeMirror
-          setView={setHeadersEditorState}
-          initialCode={headersEditorState?.state.doc.toString() || ''}
-          areaHeight="100px"
-          main={false}
-        />
+        <button type="button" className={style.button} onClick={handleDocs}>
+          Docs
+        </button>
       </div>
-      <div className={style.row}>
-        <CodeMirrorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
+      <div className={style.body}>
+        <div className={style.row}>
+          <h3 className={style.title}>Code editor</h3>
+          <CodeMirror
+            setView={setMainEditorState}
+            initialCode={mainEditorState?.state.doc.toString() || ''}
+            areaHeight="400px"
+            main
+          />
+          <h3 className={style.title}>Variables</h3>
+          <CodeMirror
+            setView={setVariablesEditorState}
+            initialCode={variablesEditorState?.state.doc.toString() || ''}
+            areaHeight="100px"
+            main={false}
+          />
+          <h3 className={style.title}>Headers</h3>
+          <CodeMirror
+            setView={setHeadersEditorState}
+            initialCode={headersEditorState?.state.doc.toString() || ''}
+            areaHeight="100px"
+            main={false}
+          />
+        </div>
+        <div className={style.row}>
+          <h3 className={style.title}>Response</h3>
+          <CodeMirrorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
+        </div>
+        <div
+          className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}
+          style={{ backgroundColor: 'grey' }}
+        >
+          Here will be documentation component
+        </div>
       </div>
-      <div className={style.row}>Here will be documentation component</div>
     </div>
   );
 };
