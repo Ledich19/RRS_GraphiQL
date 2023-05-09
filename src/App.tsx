@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ErrorPage from './pages/Page404/Page404';
 import Layout from './pages/Layout/Layout';
-import AboutUs from './pages/AboutUs/AboutUs';
 import Editor from './pages/Editor/Editor';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './components/Login/Login';

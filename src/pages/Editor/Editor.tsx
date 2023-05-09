@@ -2,16 +2,27 @@ import React, { useState } from 'react';
 import { EditorView } from 'codemirror';
 import style from './Editor.module.scss';
 import CodeMirror from '../../components/CodeMirror/CodeMirror';
+import { getData } from '../../components/http/api';
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit() {
-    console.log(mainEditorState?.state.doc);
-    console.log(variablesEditorState?.state.doc);
-    console.log(headersEditorState?.state.doc);
+  async function handleSubmit() {
+    if (mainEditorState?.state.doc.toString()) {
+      const query = mainEditorState.state.doc.toString();
+      console.log(query);
+      try {
+        setIsLoading(true);
+        const response = await getData(query);
+        console.log(response);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
   function handleReset() {
@@ -45,18 +56,21 @@ const Editor: React.FC = () => {
           setView={setMainEditorState}
           initialCode={mainEditorState?.state.doc.toString() || ''}
           areaHeight="400px"
+          main
         />
         <h3 className={style.title}>Variables</h3>
         <CodeMirror
           setView={setVariablesEditorState}
           initialCode={variablesEditorState?.state.doc.toString() || ''}
           areaHeight="100px"
+          main={false}
         />
         <h3 className={style.title}>Headers</h3>
         <CodeMirror
           setView={setHeadersEditorState}
           initialCode={headersEditorState?.state.doc.toString() || ''}
           areaHeight="100px"
+          main={false}
         />
       </div>
       <div className={style.row}>Here will be response result component</div>
