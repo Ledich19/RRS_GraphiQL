@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import { EditorView } from 'codemirror';
 import style from './Editor.module.scss';
@@ -13,7 +14,7 @@ const Editor: React.FC = () => {
   const [result, setResult] = useState({});
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
-
+  const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
   function handleDocs() {
     if (docsIsOpen) setDocsIsOpen(false);
     else setDocsIsOpen(true);
@@ -24,6 +25,10 @@ const Editor: React.FC = () => {
   }
   function handleHeaderSection() {
     setVariablesSection(false);
+  }
+  function handleAdditionalBox() {
+    if (openAdditionalBox) setOpenAdditionalBox(false);
+    else setOpenAdditionalBox(true);
   }
   async function handleSubmit() {
     if (mainEditorState?.state.doc.toString()) {
@@ -106,23 +111,39 @@ const Editor: React.FC = () => {
               >
                 Headers
               </button>
+              <button
+                type="button"
+                className={style.additional__showBtn}
+                onClick={handleAdditionalBox}
+              >
+                <span className={`${style.span} ${style.span_first}`} />
+                <span
+                  className={`${style.span} ${style.span_second}`}
+                  style={{ transform: openAdditionalBox ? 'rotate(0deg)' : 'rotate(90deg)' }}
+                />
+              </button>
             </div>
-            <CodeMirror
-              setView={setVariablesEditorState}
-              initialCode={variablesEditorState?.state.doc.toString() || ''}
-              areaHeight="200px"
-              main={false}
-              active={variablesSection}
-              // title="Variables"
-            />
-            <CodeMirror
-              setView={setHeadersEditorState}
-              initialCode={headersEditorState?.state.doc.toString() || ''}
-              areaHeight="200px"
-              main={false}
-              active={!variablesSection}
-              // title="Header"
-            />
+            <div
+              className={style.additional__codemirrors}
+              style={{ maxHeight: openAdditionalBox ? '200px' : '0px' }}
+            >
+              <CodeMirror
+                setView={setVariablesEditorState}
+                initialCode={variablesEditorState?.state.doc.toString() || ''}
+                areaHeight="200px"
+                main={false}
+                active={variablesSection}
+                // title="Variables"
+              />
+              <CodeMirror
+                setView={setHeadersEditorState}
+                initialCode={headersEditorState?.state.doc.toString() || ''}
+                areaHeight="200px"
+                main={false}
+                active={!variablesSection}
+                // title="Header"
+              />
+            </div>
           </div>
         </div>
         <div className={style.row}>
