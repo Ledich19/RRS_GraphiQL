@@ -1,5 +1,7 @@
+const $host: string = import.meta.env.VITE_API_URL;
+
 async function getData(query: string, variables = '', headers?: string) {
-  const response = await fetch('https://swapi-graphql.netlify.app/.netlify/functions/index', {
+  const response = await fetch($host, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

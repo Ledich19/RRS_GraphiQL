@@ -3,7 +3,7 @@ import { EditorView } from 'codemirror';
 import style from './Editor.module.scss';
 import CodeMirror from '../../components/CodeMirror/CodeMirror';
 import CodeMirrorOutput from '../../components/CodeMirrorOutput/CodeMirrorOutput';
-import { getData } from '../../components/http/api';
+import { getData } from '../../http/api';
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
