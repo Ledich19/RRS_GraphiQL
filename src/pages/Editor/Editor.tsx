@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { EditorView } from 'codemirror';
 import style from './Editor.module.scss';
 import CodeMirror from '../../components/CodeMirror/CodeMirror';
+import CodeMirrorOutput from '../../components/CodeMirrorOutput/CodeMirrorOutput';
 import { getData } from '../../components/http/api';
 
 const Editor: React.FC = () => {
@@ -9,6 +10,7 @@ const Editor: React.FC = () => {
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState({});
 
   async function handleSubmit() {
     if (mainEditorState?.state.doc.toString()) {
@@ -17,6 +19,7 @@ const Editor: React.FC = () => {
       try {
         setIsLoading(true);
         const response = await getData(query);
+        setResult(response);
         console.log(response);
         setIsLoading(false);
       } catch (e) {
@@ -73,7 +76,9 @@ const Editor: React.FC = () => {
           main={false}
         />
       </div>
-      <div className={style.row}>Here will be response result component</div>
+      <div className={style.row}>
+        <CodeMirrorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
+      </div>
       <div className={style.row}>Here will be documentation component</div>
     </div>
   );
