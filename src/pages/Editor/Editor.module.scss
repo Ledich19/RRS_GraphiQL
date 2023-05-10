@@ -1,6 +1,7 @@
 
 .editor {
   margin-top: 3rem;
+  flex: 1 0 auto;
 }
 
 .row {
@@ -8,6 +9,7 @@
   flex-direction: column;
   flex: 1 1 33%;
   transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+  height: 100%;
 }
 
 .button {
@@ -19,7 +21,8 @@
   font-weight: 700;
   cursor: pointer;
 }
-.nonActiveButton, .activeButton{
+
+.nonActiveButton, .activeButton {
   padding: 5px 10px;
   min-width: 110px;
   color: #fff;
@@ -28,13 +31,16 @@
   cursor: pointer;
   border: none;
 }
+
 .nonActiveButton{
   color: #045;
   border: 2px solid #045;
 }
+
 .activeButton {
   background: #045;
   color: #fff;
+}
 
 .input_main {
   min-height: 70px;
@@ -59,6 +65,7 @@
 .body{
   display: flex;
   overflow: hidden;
+  height: calc(100% - 27px);
 }
 .editorNavigation{
   width: 33%;
