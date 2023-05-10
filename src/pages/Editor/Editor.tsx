@@ -1,17 +1,50 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import { EditorView } from 'codemirror';
 import style from './Editor.module.scss';
 import CodeMirror from '../../components/CodeMirror/CodeMirror';
+import CodeMirrorOutput from '../../components/CodeMirrorOutput/CodeMirrorOutput';
+import { getData } from '../../http/api';
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState({});
+  const [docsIsOpen, setDocsIsOpen] = useState(false);
+  const [variablesSection, setVariablesSection] = useState(true);
+  const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
+  function handleDocs() {
+    if (docsIsOpen) setDocsIsOpen(false);
+    else setDocsIsOpen(true);
+  }
 
-  function handleSubmit() {
-    console.log(mainEditorState?.state.doc);
-    console.log(variablesEditorState?.state.doc);
-    console.log(headersEditorState?.state.doc);
+  function handleVariablesSection() {
+    setVariablesSection(true);
+  }
+  function handleHeaderSection() {
+    setVariablesSection(false);
+  }
+  function handleAdditionalBox() {
+    if (openAdditionalBox) setOpenAdditionalBox(false);
+    else setOpenAdditionalBox(true);
+  }
+  async function handleSubmit() {
+    if (mainEditorState?.state.doc.toString()) {
+      const query = mainEditorState.state.doc.toString();
+      const variables = variablesEditorState?.state.doc.toString();
+      console.log(query);
+      try {
+        setIsLoading(true);
+        const response = await getData(query, variables);
+        setResult(response);
+        console.log(response);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
   function handleReset() {
@@ -31,8 +64,8 @@ const Editor: React.FC = () => {
 
   return (
     <div className={style.editor}>
-      <div className={style.row}>
-        <div>
+      <div className={style.buttons}>
+        <div className={style.editorNavigation}>
           <button type="button" className={style.button} onClick={handleReset}>
             Reset
           </button>
@@ -40,27 +73,87 @@ const Editor: React.FC = () => {
             Submit
           </button>
         </div>
-        <h3 className={style.title}>Code editor</h3>
-        <CodeMirror
-          setView={setMainEditorState}
-          initialCode={mainEditorState?.state.doc.toString() || ''}
-          areaHeight="400px"
-        />
-        <h3 className={style.title}>Variables</h3>
-        <CodeMirror
-          setView={setVariablesEditorState}
-          initialCode={variablesEditorState?.state.doc.toString() || ''}
-          areaHeight="100px"
-        />
-        <h3 className={style.title}>Headers</h3>
-        <CodeMirror
-          setView={setHeadersEditorState}
-          initialCode={headersEditorState?.state.doc.toString() || ''}
-          areaHeight="100px"
-        />
+        <button type="button" className={style.button} onClick={handleDocs}>
+          {docsIsOpen ? 'Hide docs' : 'Show docs'}
+        </button>
       </div>
-      <div className={style.row}>Here will be response result component</div>
-      <div className={style.row}>Here will be documentation component</div>
+      <div className={style.body}>
+        <div className={style.row}>
+          <CodeMirror
+            setView={setMainEditorState}
+            initialCode={mainEditorState?.state.doc.toString() || ''}
+            areaHeight="400px"
+            main
+            title="Code editor"
+            active
+          />
+          <div className={style.additional}>
+            <div className={style.additional__buttons}>
+              <button
+                type="button"
+                className={
+                  !variablesSection
+                    ? style.nonActiveButton
+                    : `${style.nonActiveButton} ${style.activeButton}`
+                }
+                onClick={handleVariablesSection}
+              >
+                Variables
+              </button>
+              <button
+                type="button"
+                className={
+                  variablesSection
+                    ? style.nonActiveButton
+                    : `${style.nonActiveButton} ${style.activeButton}`
+                }
+                onClick={handleHeaderSection}
+              >
+                Headers
+              </button>
+              <button
+                type="button"
+                className={style.additional__showBtn}
+                onClick={handleAdditionalBox}
+              >
+                <span className={`${style.span} ${style.span_first}`} />
+                <span
+                  className={`${style.span} ${style.span_second}`}
+                  style={{ transform: openAdditionalBox ? 'rotate(0deg)' : 'rotate(90deg)' }}
+                />
+              </button>
+            </div>
+            <div
+              className={style.additional__codemirrors}
+              style={{ maxHeight: openAdditionalBox ? '200px' : '0px' }}
+            >
+              <CodeMirror
+                setView={setVariablesEditorState}
+                initialCode={variablesEditorState?.state.doc.toString() || ''}
+                areaHeight="200px"
+                main={false}
+                active={variablesSection}
+                // title="Variables"
+              />
+              <CodeMirror
+                setView={setHeadersEditorState}
+                initialCode={headersEditorState?.state.doc.toString() || ''}
+                areaHeight="200px"
+                main={false}
+                active={!variablesSection}
+                // title="Header"
+              />
+            </div>
+          </div>
+        </div>
+        <div className={style.row}>
+          <h3 className={style.title}>Response</h3>
+          <CodeMirrorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
+        </div>
+        <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
+          <h3 className={style.title}>Here will be documentation component</h3>
+        </div>
+      </div>
     </div>
   );
 };

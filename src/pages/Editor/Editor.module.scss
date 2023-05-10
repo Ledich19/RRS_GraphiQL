@@ -1,24 +1,97 @@
 
 .editor {
-  flex: 1 1 auto;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
   margin-top: 3rem;
 }
 .row {
-  width: 33%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 33%;
+  transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 .button {
-  width: 50%;
+  padding: 5px 10px;
+  min-width: 110px;
   background: #045;
   color: #fff;
   text-transform: uppercase;
   font-weight: 700;
-  height: 30px;
+  cursor: pointer;
 }
+.nonActiveButton, .activeButton{
+  padding: 5px 10px;
+  min-width: 110px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+.nonActiveButton{
+  color: #045;
+  border: 2px solid #045;
+}
+.activeButton {
+  background: #045;
+  color: #fff;
+}
+
 .title {
   margin: 0.5rem 0 0;
   text-align: center;
+}
+.buttons{
+
+  display: flex;
+  justify-content: space-between;
+}
+.body{
+  display: flex;
+  overflow: hidden;
+}
+.editorNavigation{
+  width: 33%;
+}
+.docs{
+  margin-right: -18%;
+  flex-basis: 0;
+  overflow: hidden;
+  transform: scaleX(0);
+}
+.additional{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  &__buttons{
+    margin-top: 10px;
+    display: flex;
+  }
+  &__showBtn{
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border:none;
+  }
+  &__codemirrors{
+    transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+  }
+}
+.span{
+  position: absolute;
+  width: 15px;
+  height: 2px;
+  background-color: #045;
+  transition: all 0.3s ease;
+  &_first{
+
+  }
+  &_second{
+
+  }
+}
+.additional > section {
+
 }

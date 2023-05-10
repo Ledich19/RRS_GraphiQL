@@ -13,4 +13,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './setupTest.ts',
   },
+  optimizeDeps: {
+    exclude: ['buffer'],
+  },
 });

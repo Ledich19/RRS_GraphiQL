@@ -1,6 +1,8 @@
+/* eslint-disable react/require-default-props */
 import React, { useEffect, useRef } from 'react';
 import { basicSetup } from 'codemirror';
 import { graphql } from 'cm6-graphql';
+import { javascript } from '@codemirror/lang-javascript';
 import { EditorView, keymap } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
 import { indentWithTab } from '@codemirror/commands';
@@ -11,9 +13,19 @@ interface CodeMirrorProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
   areaHeight: string;
+  main: boolean;
+  title?: string;
+  active?: boolean;
 }
 
-const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, areaHeight }) => {
+const CodeMirror: React.FC<CodeMirrorProps> = ({
+  setView,
+  initialCode: doc,
+  areaHeight,
+  main,
+  title,
+  active,
+}) => {
   const editorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -22,17 +34,17 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, area
       doc,
       extensions: [
         basicSetup,
-        graphql(Schema),
+        main ? graphql(Schema) : javascript(),
         keymap.of([indentWithTab]),
         EditorView.theme(
           {
             '&': {
               color: 'white',
-              background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, #034 50%)', // цвет фона редактора
+              background: 'grey', // цвет фона редактора
               height: areaHeight,
             },
             '.cm-gutters': {
-              backgroundColor: '#045', // цвет столба с нумерацией строк
+              backgroundColor: 'dark-grey', // цвет столба с нумерацией строк
               color: '#ddd',
               border: 'none',
             },
@@ -41,6 +53,10 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, area
             },
             '.ͼb': {
               color: 'yellow',
+              fontWeight: '700',
+            },
+            '.ͼc': {
+              color: 'blue',
               fontWeight: '700',
             },
             '.cm-line': {
@@ -66,7 +82,15 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({ setView, initialCode: doc, area
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorRef.current, doc, areaHeight]);
-  return <section ref={editorRef} className={style.codemirror} />;
+  return (
+    <section
+      ref={editorRef}
+      className={style.codemirror}
+      style={{ display: active ? 'block' : 'none' }}
+    >
+      <h3 className={style.title}>{title}</h3>
+    </section>
+  );
 };
 
 export default CodeMirror;

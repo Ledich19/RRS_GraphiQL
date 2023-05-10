@@ -26,9 +26,16 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-
+    "noImplicitAny": true
   },
-  "include": ["vite.config.ts","./src/**/*", "styled.d.ts", ".eslintrc.cjs", "setupTest.ts", "setupTest.ts"],
+  "include": [
+    "vite.config.ts",
+    "./src/**/*",
+    "styled.d.ts",
+    ".eslintrc.cjs",
+    "setupTest.ts",
+    "setupTest.ts",
+    "./node_modules/jsonwebtoken/**/*"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
