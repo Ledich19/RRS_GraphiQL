@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React, { useEffect, useRef } from 'react';
 import { basicSetup } from 'codemirror';
 import { graphql } from 'cm6-graphql';
@@ -6,22 +5,21 @@ import { javascript } from '@codemirror/lang-javascript';
 import { EditorView, keymap } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
 import { indentWithTab } from '@codemirror/commands';
-import style from './CodeMirror.module.scss';
+import style from './EditorInput.module.scss';
+import { theme } from './EditorInputTheme';
 import { Schema } from './graphQLShema';
 
-interface CodeMirrorProps {
+interface EditorInputProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
-  areaHeight: string;
   main: boolean;
   title?: string;
   active?: boolean;
 }
 
-const CodeMirror: React.FC<CodeMirrorProps> = ({
+const EditorInput: React.FC<EditorInputProps> = ({
   setView,
   initialCode: doc,
-  areaHeight,
   main,
   title,
   active,
@@ -36,38 +34,7 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({
         basicSetup,
         main ? graphql(Schema) : javascript(),
         keymap.of([indentWithTab]),
-        EditorView.theme(
-          {
-            '&': {
-              color: 'white',
-              background: 'grey', // цвет фона редактора
-              height: areaHeight,
-            },
-            '.cm-gutters': {
-              backgroundColor: 'dark-grey', // цвет столба с нумерацией строк
-              color: '#ddd',
-              border: 'none',
-            },
-            '.cm-scroller': {
-              overflow: 'auto',
-            },
-            '.ͼb': {
-              color: 'yellow',
-              fontWeight: '700',
-            },
-            '.ͼc': {
-              color: 'blue',
-              fontWeight: '700',
-            },
-            '.cm-line': {
-              color: '#0f0',
-            },
-            '.cm-lintRange-error': {
-              color: 'red',
-            },
-          },
-          { dark: true }
-        ),
+        EditorView.theme(theme, { dark: true }),
         EditorView.lineWrapping,
       ],
     });
@@ -81,7 +48,7 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({
       setView(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editorRef.current, doc, areaHeight]);
+  }, [editorRef.current, doc]);
   return (
     <section
       ref={editorRef}
@@ -93,4 +60,4 @@ const CodeMirror: React.FC<CodeMirrorProps> = ({
   );
 };
 
-export default CodeMirror;
+export default EditorInput;

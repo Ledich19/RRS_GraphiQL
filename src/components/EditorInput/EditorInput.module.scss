@@ -1,6 +1,8 @@
 .codemirror{
   width: 100%;
+  height: calc(100% - 24px);
 }
+
 .title {
   margin: 0.5rem 0 0;
   text-align: center;
