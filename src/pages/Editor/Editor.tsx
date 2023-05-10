@@ -9,7 +9,6 @@ const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState({});
 
   async function handleSubmit() {
@@ -18,10 +17,9 @@ const Editor: React.FC = () => {
       const variables = variablesEditorState?.state.doc.toString();
       const headers = headersEditorState?.state.doc.toString();
       try {
-        setIsLoading(true);
+        setResult('Loading..');
         const response = await getData(query, variables, headers);
         setResult(response);
-        setIsLoading(false);
       } catch (e) {
         if (e instanceof Error) setResult(e.message);
       }
