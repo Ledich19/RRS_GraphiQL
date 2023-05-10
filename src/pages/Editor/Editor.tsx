@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { EditorView } from 'codemirror';
 import style from './Editor.module.scss';
-import CodeMirror from '../../components/CodeMirror/CodeMirror';
-import CodeMirrorOutput from '../../components/CodeMirrorOutput/CodeMirrorOutput';
+import EditorInput from '../../components/EditorInput/EditorInput';
+import EditorOutput from '../../components/EditorOutput/EditorOutput';
 import { getData } from '../../http/api';
 
 const Editor: React.FC = () => {
@@ -16,15 +16,14 @@ const Editor: React.FC = () => {
     if (mainEditorState?.state.doc.toString()) {
       const query = mainEditorState.state.doc.toString();
       const variables = variablesEditorState?.state.doc.toString();
-      console.log(query);
+      const headers = headersEditorState?.state.doc.toString();
       try {
         setIsLoading(true);
-        const response = await getData(query, variables);
+        const response = await getData(query, variables, headers);
         setResult(response);
-        console.log(response);
         setIsLoading(false);
       } catch (e) {
-        console.log(e);
+        if (e instanceof Error) setResult(e.message);
       }
     }
   }
@@ -55,30 +54,33 @@ const Editor: React.FC = () => {
             Submit
           </button>
         </div>
-        <h3 className={style.title}>Code editor</h3>
-        <CodeMirror
-          setView={setMainEditorState}
-          initialCode={mainEditorState?.state.doc.toString() || ''}
-          areaHeight="400px"
-          main
-        />
-        <h3 className={style.title}>Variables</h3>
-        <CodeMirror
-          setView={setVariablesEditorState}
-          initialCode={variablesEditorState?.state.doc.toString() || ''}
-          areaHeight="100px"
-          main={false}
-        />
-        <h3 className={style.title}>Headers</h3>
-        <CodeMirror
-          setView={setHeadersEditorState}
-          initialCode={headersEditorState?.state.doc.toString() || ''}
-          areaHeight="100px"
-          main={false}
-        />
+        <div className={style.input_main}>
+          <h3 className={style.title}>Code editor</h3>
+          <EditorInput
+            setView={setMainEditorState}
+            initialCode={mainEditorState?.state.doc.toString() || ''}
+            main
+          />
+        </div>
+        <div className={style.input}>
+          <h3 className={style.title}>Variables</h3>
+          <EditorInput
+            setView={setVariablesEditorState}
+            initialCode={variablesEditorState?.state.doc.toString() || ''}
+            main={false}
+          />
+        </div>
+        <div className={style.input}>
+          <h3 className={style.title}>Headers</h3>
+          <EditorInput
+            setView={setHeadersEditorState}
+            initialCode={headersEditorState?.state.doc.toString() || ''}
+            main={false}
+          />
+        </div>
       </div>
       <div className={style.row}>
-        <CodeMirrorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
+        <EditorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
       </div>
       <div className={style.row}>Here will be documentation component</div>
     </div>
