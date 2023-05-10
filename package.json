@@ -15,7 +15,6 @@
     "@codemirror/lang-javascript": "^6.1.7",
     "@codemirror/state": "^6.2.0",
     "@codemirror/view": "^6.11.0",
-    "@esbuild/darwin-x64": "^0.17.18",
     "@reduxjs/toolkit": "^1.9.5",
     "cm6-graphql": "^0.0.5",
     "codemirror": "^6.0.1",

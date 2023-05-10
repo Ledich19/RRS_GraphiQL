@@ -2,12 +2,14 @@
 .editor {
   margin-top: 3rem;
 }
+
 .row {
   display: flex;
   flex-direction: column;
   flex: 1 1 33%;
   transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
+
 .button {
   padding: 5px 10px;
   min-width: 110px;
@@ -33,12 +35,22 @@
 .activeButton {
   background: #045;
   color: #fff;
+
+.input_main {
+  min-height: 70px;
+  height: calc(70% - 54px);
+}
+
+.input {
+  min-height: 51px;
+  height: 15%;
 }
 
 .title {
   margin: 0.5rem 0 0;
   text-align: center;
 }
+
 .buttons{
 
   display: flex;
