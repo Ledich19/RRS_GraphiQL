@@ -13,9 +13,17 @@ interface EditorInputProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
   main: boolean;
+  title?: string;
+  active?: boolean;
 }
 
-const EditorInput: React.FC<EditorInputProps> = ({ setView, initialCode: doc, main }) => {
+const EditorInput: React.FC<EditorInputProps> = ({
+  setView,
+  initialCode: doc,
+  main,
+  title,
+  active,
+}) => {
   const editorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -41,7 +49,15 @@ const EditorInput: React.FC<EditorInputProps> = ({ setView, initialCode: doc, ma
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorRef.current, doc]);
-  return <section ref={editorRef} className={style.codemirror} />;
+  return (
+    <section
+      ref={editorRef}
+      className={style.codemirror}
+      style={{ display: active ? 'block' : 'none' }}
+    >
+      <h3 className={style.title}>{title}</h3>
+    </section>
+  );
 };
 
 export default EditorInput;
