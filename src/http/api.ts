@@ -29,9 +29,8 @@ async function getSchema() {
     body: JSON.stringify({ query: getIntrospectionQuery() }),
   });
   const graphqlSchemaObj = buildClientSchema((await response.json()).data);
-  console.log(graphqlSchemaObj);
   const sdlString = printSchema(graphqlSchemaObj);
-  console.log(sdlString);
+  return sdlString;
 }
 
 // eslint-disable-next-line import/prefer-default-export

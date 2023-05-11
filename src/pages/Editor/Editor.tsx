@@ -11,12 +11,17 @@ const Editor: React.FC = () => {
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [result, setResult] = useState({});
+  const [documentation, setDocumentation] = useState({});
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
   const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
 
   useEffect(() => {
-    getSchema();
+    async function setSchema() {
+      const mySchema = await getSchema();
+      if (mySchema) setDocumentation(mySchema);
+    }
+    setSchema();
   }, []);
   function handleDocs() {
     if (docsIsOpen) setDocsIsOpen(false);
@@ -155,7 +160,9 @@ const Editor: React.FC = () => {
           <EditorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
-          <h3 className={style.title}>Here will be documentation component</h3>
+          <h3 className={style.title}>
+            <EditorOutput initialCode={documentation.toString()} />
+          </h3>
         </div>
       </div>
     </div>
