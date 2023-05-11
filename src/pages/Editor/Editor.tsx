@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { EditorView } from 'codemirror';
 import style from './Editor.module.scss';
 import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
-import { getData } from '../../http/api';
+import { getData, getSchema } from '../../http/api';
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
@@ -14,6 +14,10 @@ const Editor: React.FC = () => {
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
   const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
+
+  useEffect(() => {
+    getSchema();
+  }, []);
   function handleDocs() {
     if (docsIsOpen) setDocsIsOpen(false);
     else setDocsIsOpen(true);
@@ -80,11 +84,10 @@ const Editor: React.FC = () => {
             <EditorInput
               setView={setMainEditorState}
               initialCode={mainEditorState?.state.doc.toString() || ''}
-              areaHeight="400px"
               main
               title="Code editor"
               active
-          />
+            />
           </div>
           <div className={style.additional}>
             <div className={style.additional__buttons}>
@@ -132,7 +135,7 @@ const Editor: React.FC = () => {
                   initialCode={variablesEditorState?.state.doc.toString() || ''}
                   main={false}
                   active={variablesSection}
-                  // title="Variables"
+                  title="Variables"
                 />
               </div>
               <div className={style.input}>
@@ -141,7 +144,7 @@ const Editor: React.FC = () => {
                   initialCode={headersEditorState?.state.doc.toString() || ''}
                   main={false}
                   active={!variablesSection}
-                  // title="Header"
+                  title="Header"
                 />
               </div>
             </div>

@@ -13,8 +13,8 @@ interface EditorInputProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
   main: boolean;
-  title?: string;
-  active?: boolean;
+  title: string;
+  active: boolean;
 }
 
 const EditorInput: React.FC<EditorInputProps> = ({
