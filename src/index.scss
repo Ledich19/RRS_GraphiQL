@@ -1,3 +1,11 @@
+@font-face {
+  font-family: Starjedi;
+  font-display: swap;
+  src: url("../src/assets/fonts/starjedi/Starjedi.woff2") format("woff2"),url('../src/assets/fonts/tarjedi/Starjedi.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
