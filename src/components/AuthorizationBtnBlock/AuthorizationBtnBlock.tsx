@@ -14,7 +14,7 @@ const AuthorizationBtnBlock = ({ isUser }: PropsType) => {
     <div className={s.authorization}>
       {isUser ? (
         <>
-          <LogoutBtn />/
+          <LogoutBtn /> /&nbsp;
           <LinkBtn to="/" name={t('goToMainPage')} className={s.register} />
         </>
       ) : (
