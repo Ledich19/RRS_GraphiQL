@@ -84,7 +84,7 @@ const Editor: React.FC = () => {
               main
               title="Code editor"
               active
-          />
+            />
           </div>
           <div className={style.additional}>
             <div className={style.additional__buttons}>

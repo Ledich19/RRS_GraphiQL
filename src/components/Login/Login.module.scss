@@ -2,7 +2,7 @@ $textColor: gold;
 $greenColor: #24d12a;
 .login {
   display: flex;
-  font-family: 'Chakra Petch', sans-serif;
+  font-family: 'Chakra Petch', ShentoxRegular, sans-serif;
   font-weight: 00;
   width: 380px;
   flex-direction: column;
@@ -19,7 +19,7 @@ $greenColor: #24d12a;
 .forgotBtn,
 .register,
 .error {
-  font-family: 'Chakra Petch', sans-serif;
+  font-family: 'Chakra Petch', ShentoxRegular, sans-serif;
   margin-top: 10px;
   font-size: 1rem;
   color: $greenColor;

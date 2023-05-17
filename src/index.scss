@@ -12,6 +12,20 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'ShentoxRegular';
+  font-display: swap;
+  src: url("../src/assets/fonts/ShentoxRegular.woff2") format("woff2"),url('../src/assets/fonts/ShentoxRegular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Disket-Mono-Bold';
+  font-display: swap;
+  src: url("../src/assets/fonts/Disket-Mono-Bold.woff2") format("woff2"),url('../src/assets/fonts/Disket-Mono-Bold.ttf') format('ttf');
+  font-weight: bold;
+  font-style: normal;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,500&display=swap');
 // font-family: 'Chakra Petch', sans-serif;
