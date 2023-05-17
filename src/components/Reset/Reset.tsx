@@ -26,7 +26,7 @@ const Reset = () => {
       <button type="button" className={s.resetBtn} onClick={() => sendPasswordReset(email)}>
         Send password reset email
       </button>
-      <div>
+      <div className={s.text}>
         Don&apos;t have an account?
         <LinkBtn to="/auth/register/" name="Register" className={s.register} />
       </div>
