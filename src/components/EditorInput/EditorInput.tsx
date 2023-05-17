@@ -13,18 +13,11 @@ interface EditorInputProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
   title: string;
-  active: boolean;
   // eslint-disable-next-line react/require-default-props
   schema?: GraphQLSchema;
 }
 
-const EditorInput: React.FC<EditorInputProps> = ({
-  setView,
-  initialCode: doc,
-  title,
-  active,
-  schema,
-}) => {
+const EditorInput: React.FC<EditorInputProps> = ({ setView, initialCode: doc, title, schema }) => {
   const editorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -51,11 +44,7 @@ const EditorInput: React.FC<EditorInputProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorRef.current, doc]);
   return (
-    <section
-      ref={editorRef}
-      className={style.codemirror}
-      style={{ display: active ? 'block' : 'none' }}
-    >
+    <section ref={editorRef} className={style.codemirror}>
       <h3 className={style.title}>{title}</h3>
     </section>
   );

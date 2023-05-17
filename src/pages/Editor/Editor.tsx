@@ -28,8 +28,7 @@ const Editor: React.FC = () => {
     setSchema();
   }, []);
   function handleDocs() {
-    if (docsIsOpen) setDocsIsOpen(false);
-    else setDocsIsOpen(true);
+    setDocsIsOpen(!docsIsOpen);
   }
   function handleVariablesSection() {
     setVariablesSection(true);
@@ -137,19 +136,17 @@ const Editor: React.FC = () => {
               className={style.additional__codemirrors}
               style={{ maxHeight: openAdditionalBox ? '200px' : '0px' }}
             >
-              <div className={style.input}>
+              <div className={variablesSection ? style.input : style.input_disabled}>
                 <EditorInput
                   setView={setVariablesEditorState}
                   initialCode={variablesEditorState?.state.doc.toString() || ''}
-                  active={variablesSection}
                   title="Variables"
                 />
               </div>
-              <div className={style.input}>
+              <div className={variablesSection ? style.input_disabled : style.input}>
                 <EditorInput
                   setView={setHeadersEditorState}
                   initialCode={headersEditorState?.state.doc.toString() || ''}
-                  active={!variablesSection}
                   title="Header"
                 />
               </div>
@@ -162,7 +159,7 @@ const Editor: React.FC = () => {
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
           <h3 className={style.title}>
-            <EditorOutput initialCode={documentation.toString()} />
+            {/* <EditorOutput initialCode={documentation.toString()} /> */}
           </h3>
         </div>
       </div>
