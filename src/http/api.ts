@@ -1,4 +1,4 @@
-import { buildClientSchema, getIntrospectionQuery, printSchema } from 'graphql';
+import { buildClientSchema, getIntrospectionQuery } from 'graphql';
 
 const $host: string = import.meta.env.VITE_API_URL;
 
@@ -29,9 +29,7 @@ async function getSchema() {
     body: JSON.stringify({ query: getIntrospectionQuery() }),
   });
   const graphqlSchemaObj = buildClientSchema((await response.json()).data);
-  const sdlString = printSchema(graphqlSchemaObj);
-  return sdlString;
+  return graphqlSchemaObj;
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export { getData, getSchema };

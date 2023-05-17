@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, useEffect } from 'react';
 import { EditorView } from 'codemirror';
+import { printSchema, GraphQLSchema } from 'graphql';
 import style from './Editor.module.scss';
 import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
@@ -12,6 +12,7 @@ const Editor: React.FC = () => {
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [result, setResult] = useState({});
   const [documentation, setDocumentation] = useState({});
+  const [newSchema, setNewSchema] = useState<GraphQLSchema>();
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
   const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
@@ -19,7 +20,10 @@ const Editor: React.FC = () => {
   useEffect(() => {
     async function setSchema() {
       const mySchema = await getSchema();
-      if (mySchema) setDocumentation(mySchema);
+      if (mySchema) {
+        setDocumentation(printSchema(mySchema));
+        setNewSchema(mySchema);
+      }
     }
     setSchema();
   }, []);
@@ -27,7 +31,6 @@ const Editor: React.FC = () => {
     if (docsIsOpen) setDocsIsOpen(false);
     else setDocsIsOpen(true);
   }
-
   function handleVariablesSection() {
     setVariablesSection(true);
   }
@@ -89,7 +92,7 @@ const Editor: React.FC = () => {
             <EditorInput
               setView={setMainEditorState}
               initialCode={mainEditorState?.state.doc.toString() || ''}
-              main
+              schema={newSchema}
               title="Code editor"
               active
             />
@@ -138,7 +141,6 @@ const Editor: React.FC = () => {
                 <EditorInput
                   setView={setVariablesEditorState}
                   initialCode={variablesEditorState?.state.doc.toString() || ''}
-                  main={false}
                   active={variablesSection}
                   title="Variables"
                 />
@@ -147,7 +149,6 @@ const Editor: React.FC = () => {
                 <EditorInput
                   setView={setHeadersEditorState}
                   initialCode={headersEditorState?.state.doc.toString() || ''}
-                  main={false}
                   active={!variablesSection}
                   title="Header"
                 />

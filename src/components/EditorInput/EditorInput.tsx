@@ -5,24 +5,25 @@ import { javascript } from '@codemirror/lang-javascript';
 import { EditorView, keymap } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
 import { indentWithTab } from '@codemirror/commands';
+import { GraphQLSchema } from 'graphql';
 import style from './EditorInput.module.scss';
 import { theme } from './EditorInputTheme';
-import { Schema } from './graphQLShema';
 
 interface EditorInputProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
-  main: boolean;
   title: string;
   active: boolean;
+  // eslint-disable-next-line react/require-default-props
+  schema?: GraphQLSchema;
 }
 
 const EditorInput: React.FC<EditorInputProps> = ({
   setView,
   initialCode: doc,
-  main,
   title,
   active,
+  schema,
 }) => {
   const editorRef = useRef<HTMLElement>(null);
 
@@ -32,7 +33,7 @@ const EditorInput: React.FC<EditorInputProps> = ({
       doc,
       extensions: [
         basicSetup,
-        main ? graphql(Schema) : javascript(),
+        schema ? graphql(schema) : javascript(),
         keymap.of([indentWithTab]),
         EditorView.theme(theme, { dark: true }),
         EditorView.lineWrapping,
