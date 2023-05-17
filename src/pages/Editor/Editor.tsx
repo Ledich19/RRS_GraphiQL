@@ -93,7 +93,6 @@ const Editor: React.FC = () => {
               initialCode={mainEditorState?.state.doc.toString() || ''}
               schema={newSchema}
               title="Code editor"
-              active
             />
           </div>
           <div className={style.additional}>
