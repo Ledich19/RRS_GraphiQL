@@ -12,7 +12,6 @@ const Welcome = () => {
   return (
     <div className={s.welcome}>
       <UserInfo />
-      {!!user || <Authorization isUser={user} />}
       {!user || <LinkBtn to="/editor" name={t('start')} className={s.neonButton} />}
     </div>
   );

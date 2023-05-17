@@ -1,7 +1,7 @@
 $mainColor: #c3cdd1;
 $activeColor: #32c401;
 $lightColor: #00ff62;
-$headerBgColor: rgba(2, 2, 2, 0);
+$headerBgColor: rgb(46, 46, 46);
 $buttonBgColor: rgb(30, 204, 30);
 $langBoxBgColor: rgba(0, 0, 0, 0);
 $langBoxBorderColor: 1px solid #18f59d;
@@ -12,6 +12,7 @@ $langBoxBorderColor: 1px solid #18f59d;
   font-family: 'Starjedi', 'Disket-Mono-Bold';
   margin-bottom: 10px;
   padding: 10px;
+  border-radius: 5px;
   box-sizing: border-box;
   background-color: $headerBgColor;
   position: sticky;
