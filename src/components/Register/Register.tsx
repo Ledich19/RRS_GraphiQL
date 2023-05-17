@@ -70,7 +70,6 @@ const Register = () => {
       <input
         type="password"
         className={s.textBox}
-
         value={password.value}
         onChange={(e) => password.onChange(e)}
         onBlur={() => password.onBlur()}
@@ -88,7 +87,7 @@ const Register = () => {
         {t('registerWith')}
       </button>
 
-      <div>
+      <div className={s.text}>
         {t('haveAccount')}
         <LinkBtn to="/auth/login" name={t('login')} className={s.login} />
       </div>
