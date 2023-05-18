@@ -10,7 +10,7 @@ const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState<string>();
   const [documentation, setDocumentation] = useState({});
   const [newSchema, setNewSchema] = useState<GraphQLSchema>();
   const [docsIsOpen, setDocsIsOpen] = useState(false);
@@ -48,7 +48,7 @@ const Editor: React.FC = () => {
       try {
         setResult('Loading..');
         const response = await getData(query, variables, headers);
-        setResult(response);
+        setResult(JSON.stringify(response, null, '\t'));
       } catch (e) {
         if (e instanceof Error) setResult(e.message);
       }
@@ -154,7 +154,7 @@ const Editor: React.FC = () => {
         </div>
         <div className={style.row}>
           <h3 className={style.title}>Response</h3>
-          <EditorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
+          <EditorOutput initialCode={result || ''} />
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
           <h3 className={style.title}>
