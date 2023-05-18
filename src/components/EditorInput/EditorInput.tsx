@@ -42,7 +42,7 @@ const EditorInput: React.FC<EditorInputProps> = ({ setView, initialCode: doc, ti
       setView(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editorRef.current, doc]);
+  }, [editorRef.current, doc, schema]);
   return (
     <section ref={editorRef} className={style.codemirror}>
       <h3 className={style.title}>{title}</h3>
