@@ -12,9 +12,7 @@ const Welcome = () => {
   return (
     <div className={s.welcome}>
       <UserInfo />
-      <h1>{t('welcome')}</h1>
-      <Authorization isUser={user} />
-      {!user || <LinkBtn to="/app" name={t('start')} className={s.button} />}
+      {!user || <LinkBtn to="/editor" name={t('start')} className={s.neonButton} />}
     </div>
   );
 };

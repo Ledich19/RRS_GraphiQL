@@ -24,5 +24,6 @@
   "showdocs": "show docs",
   "hidedocs": "hide docs",
   "variables": "variables",
-  "headers": "headers"
+  "headers": "headers",
+  "goToMainPage": "Go to Main Page"
 }

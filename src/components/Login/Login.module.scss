@@ -1,18 +1,39 @@
+$textColor: gold;
+$greenColor: #24d12a;
 .login {
   display: flex;
-  width: 300px;
+  font-family: 'Chakra Petch', ShentoxRegular, sans-serif;
+  font-weight: 00;
+  width: 380px;
   flex-direction: column;
 }
-.email {
+
+.text {
+  color: $textColor;
 }
-.password {
-}
-.loginBtn {
-}
-.loginGoogle {
-}
-.forgotBtn {
+
+.email,
+.password,
+.loginBtn,
+.loginGoogle,
+.forgotBtn,
+.register,
+.error {
+  font-family: 'Chakra Petch', ShentoxRegular, sans-serif;
+  margin-top: 10px;
+  font-size: 1rem;
+  color: $greenColor;
+  padding: 3px;
+  border-radius: 5px;
 }
 .register {
+  margin-right: 10px;
+  margin-left: 10px;
 }
-.error{}
+
+.loginBtn,
+.loginGoogle,
+.forgotBtn,
+.register {
+  background: #000000a9;
+}
