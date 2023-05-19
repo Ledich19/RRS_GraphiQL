@@ -1,3 +1,5 @@
+import { buildClientSchema, getIntrospectionQuery } from 'graphql';
+
 const $host: string = import.meta.env.VITE_API_URL;
 
 async function getData(query: string, variables = '', headersInput?: string) {
@@ -20,5 +22,14 @@ async function getData(query: string, variables = '', headersInput?: string) {
   return response.json();
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { getData };
+async function getSchema() {
+  const response = await fetch($host, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: getIntrospectionQuery() }),
+  });
+  const graphqlSchemaObj = buildClientSchema((await response.json()).data);
+  return graphqlSchemaObj;
+}
+
+export { getData, getSchema };

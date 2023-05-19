@@ -5,25 +5,19 @@ import { javascript } from '@codemirror/lang-javascript';
 import { EditorView, keymap } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
 import { indentWithTab } from '@codemirror/commands';
+import { GraphQLSchema } from 'graphql';
 import style from './EditorInput.module.scss';
 import { theme } from './EditorInputTheme';
-import { Schema } from './graphQLShema';
 
 interface EditorInputProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
-  main: boolean;
-  title?: string;
-  active?: boolean;
+  title: string;
+  // eslint-disable-next-line react/require-default-props
+  schema?: GraphQLSchema;
 }
 
-const EditorInput: React.FC<EditorInputProps> = ({
-  setView,
-  initialCode: doc,
-  main,
-  title,
-  active,
-}) => {
+const EditorInput: React.FC<EditorInputProps> = ({ setView, initialCode: doc, title, schema }) => {
   const editorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -32,7 +26,7 @@ const EditorInput: React.FC<EditorInputProps> = ({
       doc,
       extensions: [
         basicSetup,
-        main ? graphql(Schema) : javascript(),
+        schema ? graphql(schema) : javascript(),
         keymap.of([indentWithTab]),
         EditorView.theme(theme, { dark: true }),
         EditorView.lineWrapping,
@@ -48,13 +42,9 @@ const EditorInput: React.FC<EditorInputProps> = ({
       setView(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editorRef.current, doc]);
+  }, [editorRef.current, doc, schema]);
   return (
-    <section
-      ref={editorRef}
-      className={style.codemirror}
-      style={{ display: active ? 'block' : 'none' }}
-    >
+    <section ref={editorRef} className={style.codemirror}>
       <h3 className={style.title}>{title}</h3>
     </section>
   );

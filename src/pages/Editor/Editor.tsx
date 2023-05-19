@@ -1,24 +1,35 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { EditorView } from 'codemirror';
+import { printSchema, GraphQLSchema } from 'graphql';
 import style from './Editor.module.scss';
 import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
-import { getData } from '../../http/api';
+import { getData, getSchema } from '../../http/api';
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState<string>();
+  const [documentation, setDocumentation] = useState({});
+  const [newSchema, setNewSchema] = useState<GraphQLSchema>();
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
   const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
-  function handleDocs() {
-    if (docsIsOpen) setDocsIsOpen(false);
-    else setDocsIsOpen(true);
-  }
 
+  useEffect(() => {
+    async function setSchema() {
+      const mySchema = await getSchema();
+      if (mySchema) {
+        setDocumentation(printSchema(mySchema));
+        setNewSchema(mySchema);
+      }
+    }
+    setSchema();
+  }, []);
+  function handleDocs() {
+    setDocsIsOpen(!docsIsOpen);
+  }
   function handleVariablesSection() {
     setVariablesSection(true);
   }
@@ -37,7 +48,7 @@ const Editor: React.FC = () => {
       try {
         setResult('Loading..');
         const response = await getData(query, variables, headers);
-        setResult(response);
+        setResult(JSON.stringify(response, null, '\t'));
       } catch (e) {
         if (e instanceof Error) setResult(e.message);
       }
@@ -80,11 +91,9 @@ const Editor: React.FC = () => {
             <EditorInput
               setView={setMainEditorState}
               initialCode={mainEditorState?.state.doc.toString() || ''}
-              areaHeight="400px"
-              main
+              schema={newSchema}
               title="Code editor"
-              active
-          />
+            />
           </div>
           <div className={style.additional}>
             <div className={style.additional__buttons}>
@@ -126,22 +135,18 @@ const Editor: React.FC = () => {
               className={style.additional__codemirrors}
               style={{ maxHeight: openAdditionalBox ? '200px' : '0px' }}
             >
-              <div className={style.input}>
+              <div className={variablesSection ? style.input : style.input_disabled}>
                 <EditorInput
                   setView={setVariablesEditorState}
                   initialCode={variablesEditorState?.state.doc.toString() || ''}
-                  main={false}
-                  active={variablesSection}
-                  // title="Variables"
+                  title="Variables"
                 />
               </div>
-              <div className={style.input}>
+              <div className={variablesSection ? style.input_disabled : style.input}>
                 <EditorInput
                   setView={setHeadersEditorState}
                   initialCode={headersEditorState?.state.doc.toString() || ''}
-                  main={false}
-                  active={!variablesSection}
-                  // title="Header"
+                  title="Header"
                 />
               </div>
             </div>
@@ -149,10 +154,12 @@ const Editor: React.FC = () => {
         </div>
         <div className={style.row}>
           <h3 className={style.title}>Response</h3>
-          <EditorOutput initialCode={result ? JSON.stringify(result, null, '\t') : ''} />
+          <EditorOutput initialCode={result || ''} />
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
-          <h3 className={style.title}>Here will be documentation component</h3>
+          <h3 className={style.title}>
+            {/* <EditorOutput initialCode={documentation.toString()} /> */}
+          </h3>
         </div>
       </div>
     </div>
