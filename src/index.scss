@@ -1,3 +1,37 @@
+@font-face {
+  font-family: Starjedi;
+  font-display: swap;
+  src: url("../src/assets/fonts/starjedi/Starjedi.woff2") format("woff2"),url('../src/assets/fonts/tarjedi/Starjedi.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: Starjhol;
+  font-display: swap;
+  src: url("../src/assets/fonts/starjedi/Starjhol.woff2") format("woff2"),url('../src/assets/fonts/tarjedi/Starjhol.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ShentoxRegular';
+  font-display: swap;
+  src: url("../src/assets/fonts/ShentoxRegular.woff2") format("woff2"),url('../src/assets/fonts/ShentoxRegular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Disket-Mono-Bold';
+  font-display: swap;
+  src: url("../src/assets/fonts/Disket-Mono-Bold.woff2") format("woff2"),url('../src/assets/fonts/Disket-Mono-Bold.ttf') format('ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,500&display=swap');
+// font-family: 'Chakra Petch', sans-serif;
+// размеры шрифтов
+// заголовки должны быть примерно в 1,96 
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -21,6 +55,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-size: 14px;
+  background-image: url(./assets/bg/brett-ritchie-1vKTnwLMdqs-unsplash.jpg);
 }
 
 @media (prefers-color-scheme: light) {

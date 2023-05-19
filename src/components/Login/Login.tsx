@@ -51,7 +51,7 @@ const Login = () => {
       <div>
         <LinkBtn to="/auth/reset" name={t('forgotPassword')} className={s.forgotBtn} />
       </div>
-      <div>
+      <div className={s.text}>
         {t('dontHaveAccount')}{' '}
         <LinkBtn to="/auth/register" name={t('register')} className={s.register} />
         {t('now')}

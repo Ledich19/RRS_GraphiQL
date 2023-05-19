@@ -1,8 +1,8 @@
 {
   "home": "Головна",
   "editor": "Редактор",
-  "login": "Увійти",
-  "register": "Реєстрація",
+  "login": "Увiйти",
+  "register": "Реэстрацiя",
   "logout": "Вийти",
   "start": "Розпочати",
   "welcome": "Ласкаво просимо",
@@ -16,5 +16,6 @@
   "loggedInAs": "Увійшов як",
   "fullName": "Повне ім'я",
   "haveAccount": "У вас уже є обліковий запис?",
-  "registerWith": "Реєстрація за допомогою Google"
+  "registerWith": "Реєстрація за допомогою Google",
+  "goToMainPage": "Перейти на головну сторінку"
 }

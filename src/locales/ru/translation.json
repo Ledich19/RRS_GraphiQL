@@ -16,5 +16,6 @@
   "loggedInAs": "Зашёл как",
   "fullName": "Полное имя",
   "haveAccount": "Уже есть аккаунт?",
-  "registerWith": "Регистрация с помощью Google"
+  "registerWith": "Регистрация с помощью Google",
+  "goToMainPage": "Перейти на главную страницу"
 }

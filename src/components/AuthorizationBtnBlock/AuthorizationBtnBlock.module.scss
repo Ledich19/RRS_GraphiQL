@@ -1,5 +1,124 @@
+$blueColor: #245ed1;
+$greenColor: #24d12a;
 .authorization {
+  font-size: 1rem;
+  font-weight: bold;
+  color: gold;
 }
-.login, .register{
+.login,
+.register {
   cursor: pointer;
+}
+
+
+.register,
+.login,
+.register {
+  border-radius: 5px;
+  font-family: 'Starjedi', 'Disket-Mono-Bold';
+  background: #00000000;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 0.25em;
+  position: relative;
+}
+.login {
+  color: $greenColor;
+  border: $greenColor 0.125em solid;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em --clr-two;
+  box-shadow: inset 0 0 0.5em 0 $greenColor, 0 0 0.5em 0 $greenColor;
+}
+
+.register {
+  color: $blueColor;
+  border: $blueColor 0.125em solid;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em --clr-two;
+  box-shadow: inset 0 0 0.5em 0 $blueColor, 0 0 0.5em 0 $blueColor;
+}
+
+
+
+.register::before,
+.login::before,
+.register::before {
+  content: '';
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  filter: blur(1.5em);
+  opacity: 0.7;
+  pointer-events: none;
+}
+.register.active::before,
+.login.active::before,
+.register.active::before {
+  animation: scalingShadow 0.5s ease-in-out;
+}
+
+@keyframes scalingShadow {
+  0% {
+    top: 120%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  }
+  50% {
+    top: 165%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.75, 0.3);
+  }
+  100% {
+    top: 120%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  }
+}
+
+.register::after,
+.login::after,
+.register::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 100ms linear;
+}
+
+
+.login::after {
+  box-shadow: 0 0 2em 0.5em $greenColor;
+  background-color: $greenColor;
+}
+
+.register::after {
+  box-shadow: 0 0 2em 0.5em $blueColor;
+  background-color: $blueColor;
+}
+
+.neonButton:hover::before,
+.neonButton:focus::before {
+  opacity: 1;
+}
+.register:hover::after,
+.login:hover::after,
+.register:hover::after,
+.register:focus::after,
+.login:focus::after,
+.register:focus::after {
+  opacity: 1;
+}
+
+.register:hover,
+.login:hover,
+.register:hover,
+.register:focus,
+.login:focus,
+.register:focus {
+  outline: none;
+  color: black;
+  text-shadow: none;
 }
