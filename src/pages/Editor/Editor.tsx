@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EditorView } from 'codemirror';
 import { printSchema, GraphQLSchema } from 'graphql';
+import { useTranslation } from 'react-i18next';
 import style from './Editor.module.scss';
 import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
@@ -16,6 +17,7 @@ const Editor: React.FC = () => {
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
   const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function setSchema() {
@@ -69,20 +71,19 @@ const Editor: React.FC = () => {
     if (variablesTransaction) variablesEditorState?.dispatch(variablesTransaction);
     if (hedersTransaction) headersEditorState?.dispatch(hedersTransaction);
   }
-
   return (
     <div className={style.editor}>
       <div className={style.buttons}>
         <div className={style.editorNavigation}>
           <button type="button" className={style.button} onClick={handleReset}>
-            Reset
+            {t('reset')}
           </button>
           <button type="button" className={style.button} onClick={handleSubmit}>
-            Submit
+            {t('submit')}
           </button>
         </div>
         <button type="button" className={style.button} onClick={handleDocs}>
-          {docsIsOpen ? 'Hide docs' : 'Show docs'}
+          {!docsIsOpen ? t('showdocs') : t('hidedocs')}
         </button>
       </div>
       <div className={style.body}>
@@ -92,7 +93,7 @@ const Editor: React.FC = () => {
               setView={setMainEditorState}
               initialCode={mainEditorState?.state.doc.toString() || ''}
               schema={newSchema}
-              title="Code editor"
+              title={t('codeeditor')}
             />
           </div>
           <div className={style.additional}>
@@ -106,7 +107,7 @@ const Editor: React.FC = () => {
                 }
                 onClick={handleVariablesSection}
               >
-                Variables
+                {t('variables')}
               </button>
               <button
                 type="button"
@@ -117,7 +118,7 @@ const Editor: React.FC = () => {
                 }
                 onClick={handleHeaderSection}
               >
-                Headers
+                {t('headers')}
               </button>
               <button
                 type="button"
@@ -139,21 +140,21 @@ const Editor: React.FC = () => {
                 <EditorInput
                   setView={setVariablesEditorState}
                   initialCode={variablesEditorState?.state.doc.toString() || ''}
-                  title="Variables"
+                  title={t('variables')}
                 />
               </div>
               <div className={variablesSection ? style.input_disabled : style.input}>
                 <EditorInput
                   setView={setHeadersEditorState}
                   initialCode={headersEditorState?.state.doc.toString() || ''}
-                  title="Header"
+                  title={t('headers')}
                 />
               </div>
             </div>
           </div>
         </div>
         <div className={style.row}>
-          <h3 className={style.title}>Response</h3>
+          <h3 className={style.title}>{t('response')}</h3>
           <EditorOutput initialCode={result || ''} />
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>

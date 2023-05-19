@@ -17,5 +17,13 @@
   "fullName": "Полное имя",
   "haveAccount": "Уже есть аккаунт?",
   "registerWith": "Регистрация с помощью Google",
+  "submit": "Отправить",
+  "reset": "Сбросить",
+  "response": "Ответ",
+  "codeeditor": "Редактор кода",
+  "showdocs": "Показать документацию",
+  "hidedocs": "Скрыть документацию",
+  "variables": "Переменные",
+  "headers": "Заголовки",
   "goToMainPage": "Перейти на главную страницу"
 }

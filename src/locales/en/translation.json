@@ -17,5 +17,13 @@
   "fullName": "Full name",
   "haveAccount": "Already have an account?",
   "registerWith": "Register with Google",
+  "submit": "Submit",
+  "reset": "Reset",
+  "response": "Response",
+  "codeeditor": "Code editor",
+  "showdocs": "show docs",
+  "hidedocs": "hide docs",
+  "variables": "variables",
+  "headers": "headers",
   "goToMainPage": "Go to Main Page"
 }
