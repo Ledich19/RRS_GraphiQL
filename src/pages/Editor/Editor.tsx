@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { EditorView } from 'codemirror';
-import { printSchema, GraphQLSchema } from 'graphql';
+import { GraphQLSchema, GraphQLFieldMap } from 'graphql';
 import { useTranslation } from 'react-i18next';
 import style from './Editor.module.scss';
 import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
+import Documentations from '../../components/Documentations/Documentations';
 import { getData, getSchema } from '../../http/api';
 
 const Editor: React.FC = () => {
@@ -12,7 +13,7 @@ const Editor: React.FC = () => {
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [result, setResult] = useState<string>();
-  const [documentation, setDocumentation] = useState({});
+  const [documentation, setDocumentation] = useState<GraphQLFieldMap<never, never> | undefined>();
   const [newSchema, setNewSchema] = useState<GraphQLSchema>();
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
@@ -23,7 +24,7 @@ const Editor: React.FC = () => {
     async function setSchema() {
       const mySchema = await getSchema();
       if (mySchema) {
-        setDocumentation(printSchema(mySchema));
+        setDocumentation(mySchema.getQueryType()?.getFields());
         setNewSchema(mySchema);
       }
     }
@@ -158,9 +159,7 @@ const Editor: React.FC = () => {
           <EditorOutput initialCode={result || ''} />
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
-          <h3 className={style.title}>
-            {/* <EditorOutput initialCode={documentation.toString()} /> */}
-          </h3>
+          <Documentations fields={documentation} />
         </div>
       </div>
     </div>
