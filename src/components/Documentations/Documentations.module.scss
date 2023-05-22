@@ -16,7 +16,50 @@
   width: 100%;
   flex-grow: 3;
   background: gray;
-  color: greenyellow;
   text-align: left;
   padding: 0.5rem;
+}
+
+.name {
+  font-size: 1.2rem;
+  color: rgb(255, 158, 1);
+}
+
+.description {
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0 0 1rem 0;
+  color: blueviolet;
+}
+
+.argName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+.argType {
+  font-size: 1rem;
+  color: rgb(255, 230, 0);
+}
+
+.field {
+  cursor: pointer;
+  &:hover > .fieldType {
+    color: rgb(0, 0, 132);
+  }
+  &:hover > .fieldName {
+    color: rgb(125, 208, 0);
+  }
+}
+
+.fieldName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: greenyellow;
+}
+
+.fieldType {
+  font-size: 1rem;
+  color: blue;
 }
