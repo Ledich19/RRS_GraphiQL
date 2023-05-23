@@ -55,16 +55,6 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
           { name: key, type, args: currentFields[key]?.args, fields: undefined },
         ]);
       }
-/*       const arr = [
-        ...history,
-        { name: key, type, args: currentFields[key]?.args, fields: currentFields },
-      ];
-      setHistory([
-        ...history,
-        { name: key, type, args: currentFields[key]?.args, fields: currentFields },
-      ]);
-      console.log(arr);
-      console.log(history); */
     }
   }
 
