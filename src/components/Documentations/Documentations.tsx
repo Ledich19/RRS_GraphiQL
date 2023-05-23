@@ -16,19 +16,17 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [args, setArgs] = useState([]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     setCurrentFields(fields);
     if (currentFields) setKeys(Object.keys(currentFields));
+    setHistory([{ name: 'Root', args: [], type: '', fields }]);
   }, [fields]);
   function handleFields(key: string, type: string) {
     setName(key);
     setType(type);
-    console.log(currentFields);
     if (currentFields) {
-      console.log(currentFields[key]?.type);
-      console.log(currentFields[key]?.type?.ofType);
-
       if (currentFields[key]?.type?.ofType?.getFields) {
         setCurrentFields(currentFields[key].type.ofType.getFields());
         setKeys(Object.keys(currentFields[key].type.ofType.getFields()));
@@ -43,13 +41,47 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
         setDescription(currentFields[key].description);
       }
       setArgs(currentFields[key]?.args);
+      const arr = [
+        ...history,
+        { name: key, type, args: currentFields[key]?.args, fields: currentFields },
+      ];
+      setHistory([
+        ...history,
+        { name: key, type, args: currentFields[key]?.args, fields: currentFields },
+      ]);
+      console.log(arr);
+      console.log(history);
     }
+  }
+
+  function handleHistory(key: number) {
+    setCurrentFields(history[key].fields);
+    setKeys(Object.keys(history[key].fields));
+    setName(history[key].name);
+    setType(history[key].type);
+    setArgs(history[key].args);
+    setHistory(history.filter((el, idx) => idx <= key));
   }
   return (
     <div className={style.wrapper}>
       <h3 className={style.title}>Documentations</h3>
       <div className={style.out}>
-        <h3 className={style.name}>{`${name}: ${type}`}</h3>
+        <div className={style.history}>
+          {history.length > 0 &&
+            history.map((el, idx) => {
+              return (
+                <span key={idx} onClick={() => handleHistory(idx)}>
+                  {` ${el.name} `}&rArr;
+                </span>
+              );
+            })}
+        </div>
+        <h3 className={style.name}>
+          {history.length > 1 && (
+            <span className={style.name_pointer} onClick={() => handleHistory(history.length - 2)}>&lArr;</span>
+          )}
+          {` ${name}: ${type}`}
+        </h3>
         <div className={style.description}>{description}</div>
         {args.length > 0 && (
           <div className={style.args}>
@@ -68,7 +100,7 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
           <div className={style.fields}>
             <h4>Fields:</h4>
             {keys.map((el: string, idx: number) => {
-              const fieldType = currentFields[el].type.name
+              const fieldType = currentFields[el].type?.name
                 ? currentFields[el].type.name
                 : currentFields[el].type.ofType.name;
               return (

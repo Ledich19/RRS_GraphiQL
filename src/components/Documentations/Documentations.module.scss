@@ -20,9 +20,16 @@
   padding: 0.5rem;
 }
 
+.history {
+  cursor: pointer;
+}
+
 .name {
   font-size: 1.2rem;
   color: rgb(255, 158, 1);
+  &_pointer{
+    cursor: pointer;
+  }
 }
 
 .description {
