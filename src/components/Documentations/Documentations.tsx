@@ -26,22 +26,36 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
   function handleFields(key: string, type: string) {
     setName(key);
     setType(type);
+    setArgs(currentFields[key]?.args);
     if (currentFields) {
       if (currentFields[key]?.type?.ofType?.getFields) {
-        setCurrentFields(currentFields[key].type.ofType.getFields());
+        const newFields = currentFields[key].type.ofType.getFields();
+        setCurrentFields(newFields);
         setKeys(Object.keys(currentFields[key].type.ofType.getFields()));
         setDescription(currentFields[key]?.type?.ofType?.description);
+        setHistory([
+          ...history,
+          { name: key, type, args: currentFields[key]?.args, fields: newFields },
+        ]);
       } else if (currentFields[key]?.type?.getFields) {
-        setCurrentFields(currentFields[key].type.getFields());
+        const newFields = currentFields[key].type.getFields();
+        setCurrentFields(newFields);
         setKeys(Object.keys(currentFields[key].type.getFields()));
         setDescription(currentFields[key]?.type?.description);
+        setHistory([
+          ...history,
+          { name: key, type, args: currentFields[key]?.args, fields: newFields },
+        ]);
       } else {
         setCurrentFields(undefined);
         setKeys([]);
         setDescription(currentFields[key].description);
+        setHistory([
+          ...history,
+          { name: key, type, args: currentFields[key]?.args, fields: undefined },
+        ]);
       }
-      setArgs(currentFields[key]?.args);
-      const arr = [
+/*       const arr = [
         ...history,
         { name: key, type, args: currentFields[key]?.args, fields: currentFields },
       ];
@@ -50,7 +64,7 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
         { name: key, type, args: currentFields[key]?.args, fields: currentFields },
       ]);
       console.log(arr);
-      console.log(history);
+      console.log(history); */
     }
   }
 
