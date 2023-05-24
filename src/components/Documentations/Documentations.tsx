@@ -1,70 +1,77 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
-import { GraphQLFieldMap } from 'graphql';
+import { GraphQLArgument } from 'graphql';
+import { Maybe } from 'graphql/jsutils/Maybe';
 import style from './Documentations.module.scss';
+import { IField, IDocumentation, IHistory } from '../../interfaces';
 
 interface IProps {
-  fields: GraphQLFieldMap<never, never> | undefined;
+  fields: IField | undefined;
 }
 
 const Documentations: React.FC<IProps> = ({ fields }) => {
-  const [currentFields, setCurrentFields] = useState();
-  const [keys, setKeys] = useState<string[]>();
+  const [currentFields, setCurrentFields] = useState<IField>();
+  const [keys, setKeys] = useState<string[]>([]);
   const [name, setName] = useState('Root');
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
-  const [args, setArgs] = useState([]);
-  const [history, setHistory] = useState([]);
+  const [args, setArgs] = useState<readonly GraphQLArgument[]>([]);
+  const [history, setHistory] = useState<IHistory[]>([]);
 
   useEffect(() => {
     setCurrentFields(fields);
     if (currentFields) setKeys(Object.keys(currentFields));
     setHistory([{ name: 'Root', args: [], type: '', fields }]);
   }, [fields]);
-  function handleFields(key: string, type: string) {
+
+  function handleFields(key: string, fieldType: string) {
     setName(key);
-    setType(type);
-    setArgs(currentFields[key]?.args);
-    if (currentFields) {
-      if (currentFields[key]?.type?.ofType?.getFields) {
-        const newFields = currentFields[key].type.ofType.getFields();
+    setType(fieldType);
+    if (currentFields && currentFields[key]) {
+      const newList = currentFields[key];
+      if (newList) setArgs(newList.args);
+      let newFields: IField | undefined;
+      let newDescription: Maybe<string> = '';
+      if (newList.type?.ofType?.getFields) {
+        newFields = newList.type.ofType.getFields();
+        newDescription = newList.type.ofType.description;
+      } else if (newList.type?.getFields) {
+        newFields = newList.type.getFields();
+        newDescription = newList.type.description;
+      }
+      if (newFields && newDescription) {
         setCurrentFields(newFields);
-        setKeys(Object.keys(currentFields[key].type.ofType.getFields()));
-        setDescription(currentFields[key]?.type?.ofType?.description);
+        setKeys(Object.keys(newFields));
+        setDescription(newDescription);
         setHistory([
           ...history,
-          { name: key, type, args: currentFields[key]?.args, fields: newFields },
-        ]);
-      } else if (currentFields[key]?.type?.getFields) {
-        const newFields = currentFields[key].type.getFields();
-        setCurrentFields(newFields);
-        setKeys(Object.keys(currentFields[key].type.getFields()));
-        setDescription(currentFields[key]?.type?.description);
-        setHistory([
-          ...history,
-          { name: key, type, args: currentFields[key]?.args, fields: newFields },
+          { name: key, type: fieldType, args: newList.args, fields: newFields },
         ]);
       } else {
         setCurrentFields(undefined);
         setKeys([]);
-        setDescription(currentFields[key].description);
+        if (newList.description) setDescription(newList.description);
         setHistory([
           ...history,
-          { name: key, type, args: currentFields[key]?.args, fields: undefined },
+          { name: key, type: fieldType, args: newList.args, fields: undefined },
         ]);
       }
     }
   }
 
   function handleHistory(key: number) {
-    setCurrentFields(history[key].fields);
-    setKeys(Object.keys(history[key].fields));
+    const newFields = history[key].fields;
+    if (newFields) {
+      setCurrentFields(newFields);
+      setKeys(Object.keys(newFields));
+    }
     setName(history[key].name);
     setType(history[key].type);
     setArgs(history[key].args);
-    setHistory(history.filter((el, idx) => idx <= key));
+    setHistory(history.filter((_el, idx) => idx <= key));
   }
   return (
     <div className={style.wrapper}>
@@ -82,7 +89,9 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
         </div>
         <h3 className={style.name}>
           {history.length > 1 && (
-            <span className={style.name_pointer} onClick={() => handleHistory(history.length - 2)}>&lArr;</span>
+            <span className={style.name_pointer} onClick={() => handleHistory(history.length - 2)}>
+              &lArr;
+            </span>
           )}
           {` ${name}: ${type}`}
         </h3>
@@ -94,7 +103,7 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
               return (
                 <div key={idx}>
                   <span className={style.argName}>{`${el.name}: `}</span>
-                  <span className={style.argType}>{el.type.name}</span>
+                  <span className={style.argType}>{el?.type.toString()}</span>
                 </div>
               );
             })}
@@ -103,10 +112,12 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
         {keys && currentFields && (
           <div className={style.fields}>
             <h4>Fields:</h4>
-            {keys.map((el: string, idx: number) => {
-              const fieldType = currentFields[el].type?.name
-                ? currentFields[el].type.name
-                : currentFields[el].type.ofType.name;
+            {keys.map((el, idx) => {
+              let fieldType = '';
+              let field: IDocumentation | undefined;
+              if (currentFields[el]) field = currentFields[el];
+              if (field?.type?.ofType?.name) fieldType = field.type.ofType.name;
+              if (field?.type?.name) fieldType = field.type.name;
               return (
                 <div
                   className={style.field}

@@ -7,13 +7,17 @@ import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
 import Documentations from '../../components/Documentations/Documentations';
 import { getData, getSchema } from '../../http/api';
+import { IField, IDocumentation } from '../../interfaces';
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [result, setResult] = useState<string>();
-  const [documentation, setDocumentation] = useState<GraphQLFieldMap<never, never> | undefined>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [documentation, setDocumentation] = useState<
+    GraphQLFieldMap<IField, IDocumentation> | undefined
+  >();
   const [newSchema, setNewSchema] = useState<GraphQLSchema>();
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
