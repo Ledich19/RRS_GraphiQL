@@ -1,16 +1,18 @@
 const theme = {
   '&': {
     color: 'white',
-    background: 'grey', // цвет фона редактора
+    background: 'rgb(30, 30, 30)', // цвет фона редактора
     height: '100%',
+    borderRadius: '5px',
   },
   '.cm-gutters': {
-    backgroundColor: 'dark-grey', // цвет столба с нумерацией строк
+    backgroundColor: 'rgb(10, 10, 10)', // цвет столба с нумерацией строк
     color: '#ddd',
     border: 'none',
   },
   '.cm-scroller': {
     overflow: 'auto',
+    borderRadius: '5px',
   },
   '.ͼb': {
     color: 'yellow',
