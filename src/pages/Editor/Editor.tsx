@@ -19,9 +19,9 @@ const Editor: React.FC = () => {
     GraphQLFieldMap<IField, IDocumentation> | undefined
   >();
   const [newSchema, setNewSchema] = useState<GraphQLSchema>();
-  const [docsIsOpen, setDocsIsOpen] = useState(true);
+  const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
-  const [openAdditionalBox, setOpenAdditionalBox] = useState(true);
+  const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -137,7 +137,7 @@ const Editor: React.FC = () => {
             </div>
             <div
               className={style.additional__codemirrors}
-              style={{ maxHeight: openAdditionalBox ? '200px' : '0px' }}
+              style={{ display: openAdditionalBox ? 'block' : 'none' }}
             >
               <div className={variablesSection ? style.input : style.input_disabled}>
                 <EditorInput

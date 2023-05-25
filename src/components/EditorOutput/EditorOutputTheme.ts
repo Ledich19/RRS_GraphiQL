@@ -4,6 +4,7 @@ const theme = {
     background: 'grey', // цвет фона редактора,
     height: '100%',
     width: '100%',
+    minHeight: '120px',
   },
   '.cm-gutters': {
     backgroundColor: 'dark-grey', // цвет столба с нумерацией строк
