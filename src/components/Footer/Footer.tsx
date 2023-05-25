@@ -7,7 +7,7 @@ import logoBlue from '../../assets/logo/logo-git-blue.png';
 
 const Footer: React.FC = () => {
   return (
-    <div className={style.footer}>
+    <footer className={style.footer}>
       <Link to="https://rs.school/" className={style.rsschool} />
       <span className={style.year}>2023</span>
       <div className={style.authors}>
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
           nrg-spirit
         </Link>
       </div>
-    </div>
+    </footer>
   );
 };
 
