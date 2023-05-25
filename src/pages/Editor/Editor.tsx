@@ -19,9 +19,9 @@ const Editor: React.FC = () => {
     GraphQLFieldMap<IField, IDocumentation> | undefined
   >();
   const [newSchema, setNewSchema] = useState<GraphQLSchema>();
-  const [docsIsOpen, setDocsIsOpen] = useState(false);
+  const [docsIsOpen, setDocsIsOpen] = useState(true);
   const [variablesSection, setVariablesSection] = useState(true);
-  const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
+  const [openAdditionalBox, setOpenAdditionalBox] = useState(true);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -93,14 +93,12 @@ const Editor: React.FC = () => {
       </div>
       <div className={style.body}>
         <div className={style.row}>
-          <div className={style.input_main}>
-            <EditorInput
-              setView={setMainEditorState}
-              initialCode={mainEditorState?.state.doc.toString() || ''}
-              schema={newSchema}
-              title={t('codeeditor')}
-            />
-          </div>
+          <EditorInput
+            setView={setMainEditorState}
+            initialCode={mainEditorState?.state.doc.toString() || ''}
+            schema={newSchema}
+            title={t('codeeditor')}
+          />
           <div className={style.additional}>
             <div className={style.additional__buttons}>
               <button
@@ -159,7 +157,6 @@ const Editor: React.FC = () => {
           </div>
         </div>
         <div className={style.row}>
-          <h3 className={style.title}>{t('response')}</h3>
           <EditorOutput initialCode={result || ''} />
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>

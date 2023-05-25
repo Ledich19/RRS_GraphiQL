@@ -1,6 +1,9 @@
 
 .editor {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
 
 .row {
@@ -8,12 +11,14 @@
   flex-direction: column;
   flex: 1 1 33%;
   transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
-  height: 100%;
+  max-width: 593px;
+  // height: 100%;
 }
 
 .button {
   padding: 5px 10px;
   min-width: 110px;
+  max-height: 30px;
   background: #045;
   color: #fff;
   text-transform: uppercase;
@@ -46,12 +51,6 @@
   flex-grow: 3;
 }
 
-.input {
-  display: block;
-  min-height: 51px;
-  height: 90px;
-}
-
 .input_disabled {
   display: none;
 }
@@ -59,17 +58,22 @@
 .title {
   margin: 0.5rem 0 0;
   text-align: center;
+  background-color: #020e1f;
+  color: #fff;
+  margin-top: 0;
 }
 
 .buttons{
 
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .body{
   display: flex;
   overflow: hidden;
-  height: calc(100% - 27px);
+  min-height: 490px;
+  flex: 1 1 auto;
 }
 .editorNavigation{
   width: 33%;
@@ -87,6 +91,7 @@
   &__buttons{
     margin-top: 10px;
     display: flex;
+    flex-wrap: wrap;
   }
   &__showBtn{
     width: 20px;
@@ -108,13 +113,27 @@
   height: 2px;
   background-color: #045;
   transition: all 0.3s ease;
-  &_first{
-
-  }
-  &_second{
-
-  }
 }
-.additional > section {
 
+@media (max-width:768px){
+  .title{
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .additional{
+    &__showBtn{
+      display: none;
+    }
+  }
+  .nonActiveButton, .activeButton{
+    font-size: 12px;
+    padding: 2px 5px;
+    min-width: auto;
+    flex: 1 1 auto;
+  }
+  .button {
+    font-size: 12px;
+    padding: 2px 5px;
+    max-height: 20.8px;
+  }
 }
