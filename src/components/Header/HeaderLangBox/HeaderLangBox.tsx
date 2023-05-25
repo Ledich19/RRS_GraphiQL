@@ -13,6 +13,11 @@ import s from '../Header.module.scss';
 const HeaderLangBox = () => {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
+  const flags = [
+    { country: 'en', linkToImg: usaFlag },
+    { country: 'ru', linkToImg: ruFlag },
+    { country: 'ua', linkToImg: uaFlag },
+  ];
   const { visibilityLangBox } = useSelector(
     (state: { notify: NotifyType; languageOptions: LangState }) => state.languageOptions
   );
@@ -24,33 +29,20 @@ const HeaderLangBox = () => {
         visibility: visibilityLangBox ? 'visible' : 'hidden',
       }}
     >
-      <img
-        className={s.header__iconLang}
-        src={usaFlag}
-        alt="usa"
-        onClick={() => {
-          dispatch(setLanguage('en'));
-          i18n.changeLanguage('en');
-        }}
-      />
-      <img
-        className={s.header__iconLang}
-        src={uaFlag}
-        alt="ua"
-        onClick={() => {
-          dispatch(setLanguage('ua'));
-          i18n.changeLanguage('ua');
-        }}
-      />
-      <img
-        className={s.header__iconLang}
-        src={ruFlag}
-        alt="ru"
-        onClick={() => {
-          dispatch(setLanguage('ru'));
-          i18n.changeLanguage('ru');
-        }}
-      />
+      {flags.map((country) => {
+        return (
+          <img
+            className={s.header__iconLang}
+            src={country.linkToImg}
+            alt={country.country}
+            key={country.country}
+            onClick={() => {
+              dispatch(setLanguage(country.country));
+              i18n.changeLanguage(country.country);
+            }}
+          />
+        );
+      })}
     </div>
   );
 };
