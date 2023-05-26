@@ -75,7 +75,7 @@ const Documentations: React.FC<IProps> = ({ fields }) => {
   }
   return (
     <div className={style.wrapper}>
-      <h3 className={style.title}>Documentations</h3>
+      <h3 className={style.title}>Docs</h3>
       <div className={style.out}>
         <div className={style.history}>
           {history.length > 0 &&

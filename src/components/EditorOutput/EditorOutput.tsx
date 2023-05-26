@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { basicSetup } from 'codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { EditorView } from '@codemirror/view';
+import { useTranslation } from 'react-i18next';
 import style from './EditorOutput.module.scss';
 import { theme } from './EditorOutputTheme';
 
@@ -23,7 +24,12 @@ const EditorOutput: React.FC<EditorOutputProps> = ({ initialCode: doc }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorRef.current, doc]);
-  return <section ref={editorRef} className={style.codemirror} />;
+  const { t } = useTranslation();
+  return (
+    <section ref={editorRef} className={style.codemirror}>
+      <h3 className={style.title}>{t('response')}</h3>
+    </section>
+  );
 };
 
 export default EditorOutput;

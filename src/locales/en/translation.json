@@ -23,7 +23,7 @@
   "codeeditor": "Code editor",
   "showdocs": "show docs",
   "hidedocs": "hide docs",
-  "variables": "variables",
-  "headers": "headers",
+  "variables": "Variables",
+  "headers": "Headers",
   "goToMainPage": "Go to Main Page"
 }

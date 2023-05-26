@@ -22,8 +22,14 @@ const Editor: React.FC = () => {
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
   const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
+  const [maxWidth, setMaxWidth] = useState(window.innerWidth < 850 ? window.innerWidth - 20 : 593);
   const { t } = useTranslation();
 
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 850) {
+      setMaxWidth(window.innerWidth - 20);
+    } else setMaxWidth(593);
+  });
   useEffect(() => {
     async function setSchema() {
       const mySchema = await getSchema();
@@ -92,15 +98,13 @@ const Editor: React.FC = () => {
         </button>
       </div>
       <div className={style.body}>
-        <div className={style.row}>
-          <div className={style.input_main}>
-            <EditorInput
-              setView={setMainEditorState}
-              initialCode={mainEditorState?.state.doc.toString() || ''}
-              schema={newSchema}
-              title={t('codeeditor')}
-            />
-          </div>
+        <div className={style.row} style={{ maxWidth }}>
+          <EditorInput
+            setView={setMainEditorState}
+            initialCode={mainEditorState?.state.doc.toString() || ''}
+            schema={newSchema}
+            title={t('codeeditor')}
+          />
           <div className={style.additional}>
             <div className={style.additional__buttons}>
               <button
@@ -139,7 +143,7 @@ const Editor: React.FC = () => {
             </div>
             <div
               className={style.additional__codemirrors}
-              style={{ maxHeight: openAdditionalBox ? '200px' : '0px' }}
+              style={{ display: openAdditionalBox ? 'block' : 'none' }}
             >
               <div className={variablesSection ? style.input : style.input_disabled}>
                 <EditorInput
@@ -158,11 +162,10 @@ const Editor: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={style.row}>
-          <h3 className={style.title}>{t('response')}</h3>
+        <div className={style.row} style={{ maxWidth }}>
           <EditorOutput initialCode={result || ''} />
         </div>
-        <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
+        <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`} style={{ maxWidth }}>
           <Documentations fields={documentation} />
         </div>
       </div>

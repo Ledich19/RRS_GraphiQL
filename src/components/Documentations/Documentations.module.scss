@@ -9,19 +9,26 @@
   text-align: center;
   padding: 0;
   margin: 0.5rem 0 0;
+  margin-top: 0;
   font-size: 1rem;
+  background-color: #020e1f;
+  color: #fff;
 }
 
 .out {
-  width: 100%;
-  flex-grow: 3;
-  background: gray;
+  // width: 100%;
+  // flex-grow: 3;
+  flex: 1 1 auto;
+  background: rgb(30, 30, 30);
   text-align: left;
   padding: 0.5rem;
+  border-left: 30px solid #333338;
+  box-sizing: border-box;
 }
 
 .history {
   cursor: pointer;
+  color: gold;
 }
 
 .name {
@@ -69,4 +76,16 @@
 .fieldType {
   font-size: 1rem;
   color: blue;
+}
+@media (max-width:768px){
+  .title{
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+@media (max-width:500px){
+  .fieldName, .fieldType, .name, .description{
+    font-size: 14px;
+  }
+  
 }
