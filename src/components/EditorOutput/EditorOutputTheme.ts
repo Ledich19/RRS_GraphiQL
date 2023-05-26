@@ -1,19 +1,21 @@
 const theme = {
   '&': {
     color: 'white',
-    background: 'grey', // цвет фона редактора,
+    background: 'rgb(30, 30, 30)', // цвет фона редактора,
     height: '100%',
     width: '100%',
     minHeight: '120px',
+    borderRadius: '5px',
   },
   '.cm-gutters': {
-    backgroundColor: 'dark-grey', // цвет столба с нумерацией строк
+    backgroundColor: 'rgb(10, 10, 10)', // цвет столба с нумерацией строк
     color: '#ddd',
     border: 'none',
   },
   '.cm-scroller': {
     maxWidth: '100%',
     overflow: 'none',
+    borderRadius: '5px',
   },
   '.ͼb': {
     color: 'yellow',
@@ -28,6 +30,9 @@ const theme = {
   },
   '.cm-lintRange-error': {
     color: 'red',
+  },
+  '.cm-editor': {
+    borderRadius: '5px',
   },
 };
 

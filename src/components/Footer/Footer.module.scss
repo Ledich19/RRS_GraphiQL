@@ -53,7 +53,7 @@ $visitedColor: #ffd700;
   text-decoration: none;
   font-family: 'Chakra Petch', ShentoxRegular, sans-serif;
   &:visited {
-    color: $visitedColor;
+    // color: $visitedColor;
   }
   &:active {
     color: $visitedColor;

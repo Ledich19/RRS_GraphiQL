@@ -19,7 +19,7 @@
   // width: 100%;
   // flex-grow: 3;
   flex: 1 1 auto;
-  background: gray;
+  background: rgb(30, 30, 30);
   text-align: left;
   padding: 0.5rem;
   border-left: 30px solid #333338;
@@ -28,6 +28,7 @@
 
 .history {
   cursor: pointer;
+  color: gold;
 }
 
 .name {
