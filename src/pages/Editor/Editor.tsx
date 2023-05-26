@@ -81,6 +81,7 @@ const Editor: React.FC = () => {
     if (mainTransaction) mainEditorState?.dispatch(mainTransaction);
     if (variablesTransaction) variablesEditorState?.dispatch(variablesTransaction);
     if (hedersTransaction) headersEditorState?.dispatch(hedersTransaction);
+    setResult('');
   }
   return (
     <div className={style.editor}>
