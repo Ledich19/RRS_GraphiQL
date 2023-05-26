@@ -25,20 +25,47 @@ $buttonColor: gold;
   font-weight: 700;
   cursor: pointer;
 }
-
-.nonActiveButton, .activeButton {
-  padding: 5px 10px;
+.activeButton {
+  background: #045;
+  color: #fff;
+}
+.nonActiveButton,
+.button {
+  border-radius: 5px;
   min-width: 110px;
   color: #fff;
   font-weight: 700;
   cursor: pointer;
   border: none;
   transition: all 0.3s ease;
+  font-family: 'Starjedi', 'Disket-Mono-Bold';
+  background: #000000;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 0.25em;
+  position: relative;
+}
+.nonActiveButton,
+.button {
+  color: $buttonColor;
+  border: $buttonColor 0.125em solid;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em --clr-two;
+  box-shadow: inset 0 0 0.5em 0 $buttonColor, 0 0 0.5em 0 $buttonColor;
 }
 
-.nonActiveButton{
-  color: #045;
-  border: 2px solid #045;
+.nonActiveButton::before,
+.button::before {
+  content: '';
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  filter: blur(1.5em);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .nonActiveButton,
@@ -70,6 +97,11 @@ $buttonColor: gold;
   filter: blur(1.5em);
   opacity: 0.7;
   pointer-events: none;
+}
+
+.nonActiveButton.active::before ,
+.button.active::before {
+  animation: scalingShadow 0.5s ease-in-out;
 }
 
 .nonActiveButton.active::before ,
@@ -219,11 +251,7 @@ $buttonColor: gold;
   background-color: $buttonColor;
   color: #000;
 }
-// @media(max-width:850px){
-//   .body{
-//     flex-wrap: wrap;
-//   }
-// }
+
 @media(max-width:850px){
   .body{
     flex-wrap: wrap;
