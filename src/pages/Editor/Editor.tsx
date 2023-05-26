@@ -94,7 +94,12 @@ const Editor: React.FC = () => {
             {t('submit')}
           </button>
         </div>
-        <button type="button" className={style.button} onClick={handleDocs}>
+        <button
+          type="button"
+          className={style.button}
+          onClick={handleDocs}
+          disabled={!documentation}
+        >
           {!docsIsOpen ? t('showdocs') : t('hidedocs')}
         </button>
       </div>
