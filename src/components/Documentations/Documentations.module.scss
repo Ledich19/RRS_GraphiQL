@@ -1,0 +1,72 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
+
+.out {
+  width: 100%;
+  flex-grow: 3;
+  background: gray;
+  text-align: left;
+  padding: 0.5rem;
+}
+
+.history {
+  cursor: pointer;
+}
+
+.name {
+  font-size: 1.2rem;
+  color: rgb(255, 158, 1);
+  &_pointer{
+    cursor: pointer;
+  }
+}
+
+.description {
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0 0 1rem 0;
+  color: blueviolet;
+}
+
+.argName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+.argType {
+  font-size: 1rem;
+  color: rgb(255, 230, 0);
+}
+
+.field {
+  cursor: pointer;
+  &:hover > .fieldType {
+    color: rgb(0, 0, 132);
+  }
+  &:hover > .fieldName {
+    color: rgb(125, 208, 0);
+  }
+}
+
+.fieldName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: greenyellow;
+}
+
+.fieldType {
+  font-size: 1rem;
+  color: blue;
+}
