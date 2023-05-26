@@ -13,6 +13,7 @@ $buttonColor: gold;
   flex: 1 1 33%;
   transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
   max-width: 593px;
+  overflow-y: scroll;
 }
 
 .button {
@@ -218,7 +219,31 @@ $buttonColor: gold;
   background-color: $buttonColor;
   color: #000;
 }
+// @media(max-width:850px){
+//   .body{
+//     flex-wrap: wrap;
+//   }
+// }
+@media(max-width:850px){
+  .body{
+    flex-wrap: wrap;
+  }
+  .row{
+    max-width: none;
+    min-width: 450px;
+  }
+  .row:nth-child(1){
+    order: 2;
+  }
+  .row:nth-child(2){
+    order:3;
+  }
+  .row:nth-child(3){
+    order:1;
+  }
+}
 @media (max-width:768px){
+
   .title{
     font-size: 14px;
     font-weight: 400;
@@ -234,22 +259,12 @@ $buttonColor: gold;
     padding: 2px 5px;
     max-height: 20.8px;
   }
-  .body{
-    flex-wrap: wrap;
-  }
   .row{
-    max-width: none;
     min-width: 380px;
+    width: 100%;
+    max-width: none;
   }
-  .row:nth-child(1){
-    order: 2;
-  }
-  .row:nth-child(2){
-    order:3;
-  }
-  .row:nth-child(3){
-    order:1;
-  }
+
 }
 @media(max-width:500px){
   .row{
