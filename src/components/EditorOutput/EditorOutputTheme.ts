@@ -4,6 +4,7 @@ const theme = {
     background: 'rgb(30, 30, 30)', // цвет фона редактора,
     height: '100%',
     width: '100%',
+    minHeight: '120px',
     borderRadius: '5px',
   },
   '.cm-gutters': {

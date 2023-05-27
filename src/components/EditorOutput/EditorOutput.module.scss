@@ -1,4 +1,19 @@
 .codemirror{
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
   border-radius: 5px;
+}
+.title {
+  margin: 0.5rem 0 0;
+  margin-top: 0;
+  text-align: center;
+  background-color: #020e1f;
+  color: #fff;
+}
+@media (max-width:768px){
+  .title{
+    font-size: 14px;
+    font-weight: 400;
+  }
 }

@@ -11,7 +11,7 @@ $langBoxBorderColor: 1px solid #18f59d;
   font-size: 1rem;
   font-family: 'Starjedi', 'Disket-Mono-Bold';
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 5px;
   box-sizing: border-box;
   background-color: $headerBgColor;
@@ -96,6 +96,6 @@ $langBoxBorderColor: 1px solid #18f59d;
   color: $activeColor;
 }
 .active {
-  background-color: $buttonBgColor;
+  background-color: rgb(2 24 70);
   padding: 5px 10px;
 }

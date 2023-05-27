@@ -1,27 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { EditorView } from 'codemirror';
-import { printSchema, GraphQLSchema } from 'graphql';
+import { GraphQLSchema, GraphQLFieldMap } from 'graphql';
+import { useTranslation } from 'react-i18next';
 import style from './Editor.module.scss';
 import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
+import Documentations from '../../components/Documentations/Documentations';
 import { getData, getSchema } from '../../http/api';
+import { IField, IDocumentation } from '../../interfaces';
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [result, setResult] = useState<string>();
-  const [documentation, setDocumentation] = useState({});
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [documentation, setDocumentation] = useState<
+    GraphQLFieldMap<IField, IDocumentation> | undefined
+  >();
   const [newSchema, setNewSchema] = useState<GraphQLSchema>();
   const [docsIsOpen, setDocsIsOpen] = useState(false);
   const [variablesSection, setVariablesSection] = useState(true);
   const [openAdditionalBox, setOpenAdditionalBox] = useState(false);
+  const [maxWidth, setMaxWidth] = useState(window.innerWidth < 850 ? window.innerWidth - 20 : 593);
+  const { t } = useTranslation();
 
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 850) {
+      setMaxWidth(window.innerWidth - 20);
+    } else setMaxWidth(593);
+  });
   useEffect(() => {
     async function setSchema() {
       const mySchema = await getSchema();
       if (mySchema) {
-        setDocumentation(printSchema(mySchema));
+        setDocumentation(mySchema.getQueryType()?.getFields());
         setNewSchema(mySchema);
       }
     }
@@ -68,33 +81,36 @@ const Editor: React.FC = () => {
     if (mainTransaction) mainEditorState?.dispatch(mainTransaction);
     if (variablesTransaction) variablesEditorState?.dispatch(variablesTransaction);
     if (hedersTransaction) headersEditorState?.dispatch(hedersTransaction);
+    setResult('');
   }
-
   return (
     <div className={style.editor}>
       <div className={style.buttons}>
         <div className={style.editorNavigation}>
           <button type="button" className={style.button} onClick={handleReset}>
-            Reset
+            {t('reset')}
           </button>
           <button type="button" className={style.button} onClick={handleSubmit}>
-            Submit
+            {t('submit')}
           </button>
         </div>
-        <button type="button" className={style.button} onClick={handleDocs}>
-          {docsIsOpen ? 'Hide docs' : 'Show docs'}
+        <button
+          type="button"
+          className={style.button}
+          onClick={handleDocs}
+          disabled={!documentation}
+        >
+          {!docsIsOpen ? t('showdocs') : t('hidedocs')}
         </button>
       </div>
       <div className={style.body}>
-        <div className={style.row}>
-          <div className={style.input_main}>
-            <EditorInput
-              setView={setMainEditorState}
-              initialCode={mainEditorState?.state.doc.toString() || ''}
-              schema={newSchema}
-              title="Code editor"
-            />
-          </div>
+        <div className={style.row} style={{ maxWidth }}>
+          <EditorInput
+            setView={setMainEditorState}
+            initialCode={mainEditorState?.state.doc.toString() || ''}
+            schema={newSchema}
+            title={t('codeeditor')}
+          />
           <div className={style.additional}>
             <div className={style.additional__buttons}>
               <button
@@ -106,7 +122,7 @@ const Editor: React.FC = () => {
                 }
                 onClick={handleVariablesSection}
               >
-                Variables
+                {t('variables')}
               </button>
               <button
                 type="button"
@@ -117,7 +133,7 @@ const Editor: React.FC = () => {
                 }
                 onClick={handleHeaderSection}
               >
-                Headers
+                {t('headers')}
               </button>
               <button
                 type="button"
@@ -133,33 +149,30 @@ const Editor: React.FC = () => {
             </div>
             <div
               className={style.additional__codemirrors}
-              style={{ maxHeight: openAdditionalBox ? '200px' : '0px' }}
+              style={{ display: openAdditionalBox ? 'block' : 'none' }}
             >
               <div className={variablesSection ? style.input : style.input_disabled}>
                 <EditorInput
                   setView={setVariablesEditorState}
                   initialCode={variablesEditorState?.state.doc.toString() || ''}
-                  title="Variables"
+                  title={t('variables')}
                 />
               </div>
               <div className={variablesSection ? style.input_disabled : style.input}>
                 <EditorInput
                   setView={setHeadersEditorState}
                   initialCode={headersEditorState?.state.doc.toString() || ''}
-                  title="Header"
+                  title={t('headers')}
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className={style.row}>
-          <h3 className={style.title}>Response</h3>
+        <div className={style.row} style={{ maxWidth }}>
           <EditorOutput initialCode={result || ''} />
         </div>
-        <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`}>
-          <h3 className={style.title}>
-            {/* <EditorOutput initialCode={documentation.toString()} /> */}
-          </h3>
+        <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`} style={{ maxWidth }}>
+          <Documentations fields={documentation} />
         </div>
       </div>
     </div>
