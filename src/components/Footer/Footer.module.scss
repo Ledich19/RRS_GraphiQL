@@ -52,9 +52,6 @@ $visitedColor: #ffd700;
   color: black;
   text-decoration: none;
   font-family: 'Chakra Petch', ShentoxRegular, sans-serif;
-  &:visited {
-    // color: $visitedColor;
-  }
   &:active {
     color: $visitedColor;
   }

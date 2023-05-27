@@ -89,7 +89,7 @@ const Register = () => {
 
       <div className={s.text}>
         {t('haveAccount')}
-        <LinkBtn to="/auth/login" name={t('login')} className={s.login} />
+        <LinkBtn to="/auth/sign-in" name={t('login')} className={s.login} />
       </div>
     </div>
   );

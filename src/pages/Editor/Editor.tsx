@@ -14,7 +14,6 @@ const Editor: React.FC = () => {
   const [variablesEditorState, setVariablesEditorState] = useState<EditorView | null>(null);
   const [headersEditorState, setHeadersEditorState] = useState<EditorView | null>(null);
   const [result, setResult] = useState<string>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [documentation, setDocumentation] = useState<
     GraphQLFieldMap<IField, IDocumentation> | undefined
   >();

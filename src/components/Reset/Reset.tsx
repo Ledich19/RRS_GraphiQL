@@ -28,7 +28,7 @@ const Reset = () => {
       </button>
       <div className={s.text}>
         Don&apos;t have an account?
-        <LinkBtn to="/auth/register/" name="Register" className={s.register} />
+        <LinkBtn to="/auth/sign-up/" name="Register" className={s.register} />
       </div>
     </div>
   );

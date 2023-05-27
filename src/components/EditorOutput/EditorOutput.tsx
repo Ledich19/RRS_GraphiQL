@@ -5,7 +5,7 @@ import { EditorView } from '@codemirror/view';
 import { useTranslation } from 'react-i18next';
 import { EditorState } from '@codemirror/state';
 import style from './EditorOutput.module.scss';
-import { theme } from './EditorOutputTheme';
+import theme from './EditorOutputTheme';
 
 interface EditorOutputProps {
   initialCode: string;

@@ -53,7 +53,7 @@ const Login = () => {
       </div>
       <div className={s.text}>
         {t('dontHaveAccount')}{' '}
-        <LinkBtn to="/auth/register" name={t('register')} className={s.register} />
+        <LinkBtn to="/auth/sign-up" name={t('register')} className={s.register} />
         {t('now')}
       </div>
     </div>

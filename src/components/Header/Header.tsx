@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,6 +31,12 @@ const Header: React.FC = () => {
     else setHeader(false);
   };
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter') {
+      dispatch(setVisibilityLangBox(true));
+    }
+  }
+
   const showBoxLanguages = () => {
     dispatch(setVisibilityLangBox(true));
   };
@@ -55,7 +59,13 @@ const Header: React.FC = () => {
       <div className={s.header__container}>
         <HeaderNavigation />
         <div className={s.header__langs} ref={headerLangBox}>
-          <div className={s.header__lang} onClick={showBoxLanguages}>
+          <div
+            role="button"
+            onKeyDown={handleKeyDown}
+            className={s.header__lang}
+            onClick={showBoxLanguages}
+            tabIndex={0}
+          >
             <img className={s.header__iconLang} src={lang} alt="current lang" />
           </div>
           <HeaderLangBox />

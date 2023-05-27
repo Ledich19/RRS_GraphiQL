@@ -1,13 +1,13 @@
 const theme = {
   '&': {
     color: 'white',
-    background: 'rgb(30, 30, 30)', // цвет фона редактора
+    background: 'rgb(30, 30, 30)',
     height: '100%',
     minHeight: '120px',
     borderRadius: '5px',
   },
   '.cm-gutters': {
-    backgroundColor: 'rgb(10, 10, 10)', // цвет столба с нумерацией строк
+    backgroundColor: 'rgb(10, 10, 10)',
     color: '#ddd',
     border: 'none',
   },
@@ -31,5 +31,4 @@ const theme = {
   },
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { theme };
+export default theme;

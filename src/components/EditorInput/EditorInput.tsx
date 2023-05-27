@@ -7,13 +7,12 @@ import { EditorState } from '@codemirror/state';
 import { indentWithTab } from '@codemirror/commands';
 import { GraphQLSchema } from 'graphql';
 import style from './EditorInput.module.scss';
-import { theme } from './EditorInputTheme';
+import theme from './EditorInputTheme';
 
 interface EditorInputProps {
   setView: (view: EditorView | null) => void;
   initialCode: string;
   title: string;
-  // eslint-disable-next-line react/require-default-props
   schema?: GraphQLSchema;
 }
 
@@ -48,6 +47,10 @@ const EditorInput: React.FC<EditorInputProps> = ({ setView, initialCode: doc, ti
       <h3 className={style.title}>{title}</h3>
     </section>
   );
+};
+
+EditorInput.defaultProps = {
+  schema: undefined,
 };
 
 export default EditorInput;
