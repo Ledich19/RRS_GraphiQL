@@ -28,9 +28,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,500&display=swap');
-// font-family: 'Chakra Petch', sans-serif;
-// размеры шрифтов
-// заголовки должны быть примерно в 1,96 
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -51,7 +49,6 @@
 body {
   margin: 0;
   display: flex;
-  //place-items: center;
   min-width: 320px;
   min-height: 100vh;
   font-size: 14px;
@@ -71,7 +68,6 @@ body {
   }
 }
 
-//<ПЕРЕМЕННЫЕ>==================================
 $minWidht: 320px;
 $maxWidht: 1152;
 $maxWidhtConteiner: 1200;
@@ -79,7 +75,7 @@ $md1: $maxWidhtConteiner + 12;
 $md2: 991.98;
 $md3: 767.98;
 $md4: 479.98;
-//<ОСНОВНАЯ СЕТКА>===================
+
 #root {
   width: 100%;
   display: flex;
