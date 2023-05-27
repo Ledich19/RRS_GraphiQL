@@ -1,7 +1,6 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useTranslation } from 'react-i18next';
 import { auth } from '../../app/firebase';
-import Authorization from '../../components/AuthorizationBtnBlock/AuthorizationBtnBlock';
 import s from './Welcome.module.scss';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import LinkBtn from '../../components/LinkBtn/LinkBtn';
