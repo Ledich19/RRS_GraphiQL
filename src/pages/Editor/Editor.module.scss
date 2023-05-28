@@ -1,0 +1,301 @@
+$buttonColor: gold;
+
+.editor {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 33%;
+  transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+  max-width: 593px;
+  overflow-y: scroll;
+}
+
+.button {
+  padding: 5px 10px;
+  min-width: 110px;
+  max-height: 30px;
+  background: #045;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.activeButton {
+  background: #045;
+  color: #fff;
+}
+.nonActiveButton,
+.button {
+  border-radius: 5px;
+  min-width: 110px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  font-family: 'Starjedi', 'Disket-Mono-Bold';
+  background: #000000;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 0.25em;
+  position: relative;
+}
+.nonActiveButton,
+.button {
+  color: $buttonColor;
+  border: $buttonColor 0.125em solid;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em --clr-two;
+  box-shadow: inset 0 0 0.5em 0 $buttonColor, 0 0 0.5em 0 $buttonColor;
+}
+
+.nonActiveButton::before,
+.button::before {
+  content: '';
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  filter: blur(1.5em);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.nonActiveButton,
+.button {
+  border-radius: 5px;
+  min-width: 110px;
+  font-family: 'Starjedi', 'Disket-Mono-Bold';
+  background: #000000;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 0.25em;
+  position: relative;
+  color: $buttonColor;
+  border: $buttonColor 0.125em solid;
+  box-shadow: inset 0 0 0.5em 0 $buttonColor, 0 0 0.5em 0 $buttonColor;
+  transition: all 0.3s ease;
+}
+
+.nonActiveButton::before,
+.button::before {
+  content: '';
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  filter: blur(1.5em);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.nonActiveButton.active::before ,
+.button.active::before {
+  animation: scalingShadow 0.5s ease-in-out;
+}
+
+.nonActiveButton.active::before ,
+.button.active::before {
+  animation: scalingShadow 0.5s ease-in-out;
+}
+
+@keyframes scalingShadow {
+  0% {
+    top: 120%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  }
+  50% {
+    top: 165%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.75, 0.3);
+  }
+  100% {
+    top: 120%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  }
+}
+
+.nonActiveButton::after ,
+.button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 100ms linear;
+}
+
+.nonActiveButton::after ,
+.button::after {
+  box-shadow: 0 0 2em 0.5em $buttonColor;
+  background-color: $buttonColor;
+}
+
+.nonActiveButton:focus::before ,
+.button:focus::before {
+  opacity: 1;
+}
+
+.nonActiveButton:hover::after,
+.nonActiveButton:focus::after ,
+.button:hover::after,
+.button:focus::after {
+  opacity: 1;
+}
+
+.nonActiveButton:hover,
+.nonActiveButton:focus ,
+.button:hover,
+.button:focus {
+  background: $buttonColor;
+  outline: none;
+  color: rgb(0, 0, 0);
+  text-shadow: none;
+}
+
+
+
+
+
+.input_main {
+  min-height: 70px;
+  flex-grow: 3;
+}
+
+.input_disabled {
+  display: none;
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  background-color: #020e1f;
+  color: #fff;
+  margin-top: 0;
+}
+
+.buttons{
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.body{
+  display: flex;
+  overflow: hidden;
+  min-height: 490px;
+  flex: 1 1 auto;
+}
+.editorNavigation{
+  width: 33%;
+}
+.docs{
+  margin-right: -18%;
+  flex-basis: 0;
+  overflow: hidden;
+  transform: scaleX(0);
+  display: none;
+}
+.additional{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  &__buttons{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__showBtn{
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #000;
+    border:0.125em solid gold ;
+    box-shadow: inset 0 0 0.5em 0 gold, 0 0 0.5em 0 gold;
+    transition: all 0.3s ease;
+    &:hover{
+      background-color: gold;
+      border:0.125em solid #000;
+    }
+    &:hover > .span{
+      background-color: #000;
+    }
+  }
+  &__codemirrors{
+    transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);  }
+}
+.span{
+  position: absolute;
+  width: 15px;
+  height: 2px;
+  background-color: gold;
+  transition: all 0.3s ease;
+}
+.activeButton {
+  background-color: $buttonColor;
+  color: #000;
+}
+
+@media(max-width:850px){
+  .body{
+    flex-wrap: wrap;
+  }
+  .row{
+    max-width: none;
+    min-width: 450px;
+  }
+  .row:nth-child(1){
+    order: 2;
+  }
+  .row:nth-child(2){
+    order:3;
+  }
+  .row:nth-child(3){
+    order:1;
+  }
+}
+@media (max-width:768px){
+
+  .title{
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .nonActiveButton, .activeButton{
+    font-size: 12px;
+    padding: 2px 5px;
+    min-width: auto;
+    flex: 1 1 auto;
+  }
+  .button {
+    font-size: 12px;
+    padding: 2px 5px;
+    max-height: 20.8px;
+  }
+  .row{
+    min-width: 380px;
+    width: 100%;
+    max-width: none;
+  }
+
+}
+@media(max-width:500px){
+  .row{
+    min-width: 300px;
+  }
+}

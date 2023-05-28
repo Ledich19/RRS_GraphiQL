@@ -1,0 +1,93 @@
+$footerBgColor: #000000;
+$redColor: #d1242a;
+$blueColor: #245ed1;
+$greenColor: #24d12a;
+
+
+$visitedColor: #ffd700;
+
+
+.footer {
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid black;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $footerBgColor;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+.rsschool {
+  width: 120px;
+  height: 50px;
+  background-image: url('./../../assets/logo/rss.svg');
+  background-repeat: no-repeat;
+}
+.year {
+  font-family: 'OldEnglish';
+  color: white;
+  font-size: 1.5rem;
+}
+.authors {
+  display: flex;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+.author1,
+.author2,
+.author3{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: .5rem;
+  color: black;
+  text-decoration: none;
+  font-family: 'Chakra Petch', ShentoxRegular, sans-serif;
+  &:active {
+    color: $visitedColor;
+  }
+}
+.author1{
+  color: $redColor;
+  &:hover {
+  color: $redColor;
+  transform: scale(1.1);
+  text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em $redColor, 0 0 0.2em $redColor;
+}
+}
+.author2{
+  color: $blueColor;
+
+  &:hover {
+  color: $blueColor;
+  transform: scale(1.1);
+  text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em $blueColor, 0 0 0.2em $blueColor;
+}
+
+}
+.author3{
+  color: $greenColor;
+  &:hover {
+  color: $greenColor;
+  transform: scale(1.1);
+  text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em $greenColor, 0 0 0.2em $greenColor;
+}
+
+}
+
+@media (max-width: 479.98px) {
+  .footer {
+    flex-direction: column;
+    height: auto;
+  }
+}

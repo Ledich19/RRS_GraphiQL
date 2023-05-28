@@ -1,0 +1,19 @@
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useTranslation } from 'react-i18next';
+import { auth } from '../../app/firebase';
+import s from './Welcome.module.scss';
+import UserInfo from '../../components/UserInfo/UserInfo';
+import LinkBtn from '../../components/LinkBtn/LinkBtn';
+
+const Welcome = () => {
+  const [user] = useAuthState(auth);
+  const { t } = useTranslation();
+  return (
+    <div className={s.welcome}>
+      <UserInfo />
+      {!user || <LinkBtn to="/editor" name={t('start')} className={s.neonButton} />}
+    </div>
+  );
+};
+
+export default Welcome;

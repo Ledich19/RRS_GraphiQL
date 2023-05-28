@@ -1,0 +1,100 @@
+$mainColor: #c3cdd1;
+$activeColor: #32c401;
+$lightColor: #00ff62;
+$headerBgColor: #020e1f;
+$buttonBgColor: rgb(30, 204, 30);
+$langBoxBgColor: rgba(0, 0, 0, 0);
+$langBoxBorderColor: 1px solid #18f59d;
+
+.header {
+  width: 100%;
+  font-size: 1rem;
+  font-family: 'Starjedi', 'Disket-Mono-Bold';
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: $headerBgColor;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  transition: all 0.3s ease;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  &__navigation {
+    flex: 1 1 auto;
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+  }
+  &__item {
+  }
+  &__lang {
+    max-width: 24px;
+    margin-right: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+  }
+  &__langs {
+    display: flex;
+  }
+  &__langsBox {
+    display: flex;
+    gap: 5px;
+    background-color: $langBoxBgColor;
+    border: 1px solid $langBoxBorderColor;
+    border-radius: 10px;
+    padding: 2px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    order: 1;
+    opacity: 0;
+  }
+  &__iconLang {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &__user {
+    order: 3;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.navLink,
+.activeLink {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+  &:hover {
+    color: $mainColor;
+  }
+}
+.navLink {
+  color: #000940;
+  text-shadow: 1px 1px 2px rgb(223, 219, 219), 0 0 1em $lightColor, 0 0 0.2em $lightColor;
+}
+.activeLink {
+  color: $activeColor;
+}
+.active {
+  background-color: rgb(2 24 70);
+  padding: 5px 10px;
+}

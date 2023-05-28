@@ -1,0 +1,38 @@
+$textColor: gold;
+$greenColor: #24d12a;
+
+.register {
+  display: flex;
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 00;
+  width: 380px;
+  flex-direction: column;
+}
+
+.text {
+  color: $textColor;
+}
+.registerBtn,
+.registerGoogle,
+.login,
+.textBox {
+  font-family: 'Chakra Petch', sans-serif;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: $greenColor;
+  padding: 3px;
+  border-radius: 5px;
+}
+.registerBtn,
+.registerGoogle,
+.login {
+  background: #000000a9;
+}
+.login{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.error {
+  color: red;
+}

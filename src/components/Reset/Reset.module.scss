@@ -1,0 +1,33 @@
+$textColor: gold;
+$greenColor: #24d12a;
+
+.reset {
+  display: flex;
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 00;
+  width: 380px;
+  flex-direction: column;
+}
+.resetBtn,
+.register,
+.textBox {
+  font-family: 'Chakra Petch', sans-serif;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: $greenColor;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.text {
+  color: $textColor;
+}
+
+.resetBtn,
+.register {
+  background: #000000a9;
+}
+.register {
+  margin-right: 10px;
+  margin-left: 10px;
+}
