@@ -11,7 +11,7 @@ const languageSlice = createSlice({
       if (action.payload) {
         return { currentLang: action.payload, visibilityLangBox: false };
       }
-      return { currentLang: 'en', visibilityLangBox: false };
+      return { ...state, currentLang: 'en', visibilityLangBox: false };
     },
     setVisibilityLangBox(state, action) {
       if (action.payload) {

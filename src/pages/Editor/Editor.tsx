@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { EditorView } from 'codemirror';
 import { GraphQLSchema, GraphQLFieldMap } from 'graphql';
 import { useTranslation } from 'react-i18next';
 import style from './Editor.module.scss';
 import EditorInput from '../../components/EditorInput/EditorInput';
 import EditorOutput from '../../components/EditorOutput/EditorOutput';
-import Documentations from '../../components/Documentations/Documentations';
 import { getData, getSchema } from '../../http/api';
 import { IField, IDocumentation } from '../../interfaces';
+import Spinner from '../../components/Spinner/Spinner';
+
+const Documentations = lazy(() => import('../../components/Documentations/Documentations'));
 
 const Editor: React.FC = () => {
   const [mainEditorState, setMainEditorState] = useState<EditorView | null>(null);
@@ -171,7 +173,9 @@ const Editor: React.FC = () => {
           <EditorOutput initialCode={result || ''} />
         </div>
         <div className={docsIsOpen ? style.row : `${style.row} ${style.docs}`} style={{ maxWidth }}>
-          <Documentations fields={documentation} />
+          <Suspense fallback={<Spinner />}>
+            <Documentations fields={documentation} />
+          </Suspense>
         </div>
       </div>
     </div>

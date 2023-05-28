@@ -11,7 +11,7 @@ const notifySlice = createSlice({
       if (action.payload) {
         return action.payload;
       }
-      return { type: null, text: null };
+      return { ...state, type: null, text: null };
     },
   },
 });

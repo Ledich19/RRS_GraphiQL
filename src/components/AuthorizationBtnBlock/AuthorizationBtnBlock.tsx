@@ -9,7 +9,7 @@ type PropsType = {
 };
 
 const AuthorizationBtnBlock = ({ isUser }: PropsType) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className={s.authorization}>
       {isUser ? (

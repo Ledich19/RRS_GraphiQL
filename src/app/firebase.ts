@@ -11,12 +11,12 @@ import {
 import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDOvb93X-SuTAlxu6QAi4ZO-CXfwsYjcZY',
-  authDomain: 'graphiql-73480.firebaseapp.com',
-  projectId: 'graphiql-73480',
-  storageBucket: 'graphiql-73480.appspot.com',
-  messagingSenderId: '534941991618',
-  appId: '1:534941991618:web:23664a8e8c7155aee5315b',
+  apiKey: 'AIzaSyDGYHrQEMZN5SbDj2V5W7v5zHKBXygZPPA',
+  authDomain: 'graphiql-66cff.firebaseapp.com',
+  projectId: 'graphiql-66cff',
+  storageBucket: 'graphiql-66cff.appspot.com',
+  messagingSenderId: '463374487931',
+  appId: '1:463374487931:web:d307a7594d6a633114edde',
 };
 
 const app = initializeApp(firebaseConfig);
