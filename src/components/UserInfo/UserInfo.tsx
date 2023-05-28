@@ -58,7 +58,7 @@ const UserInfo = () => {
         const data = doc.docs[0].data();
         setName(data.name);
       } catch (err) {
-        notify({ type: 'error', text: 'An error occured while fetching user data' });
+        notify({ type: '', text: '' });
       }
     };
     fetchUserName();
