@@ -1,22 +1,4 @@
-import {
-  DirectiveLocation,
-  GraphQLBoolean,
-  GraphQLDeprecatedDirective,
-  GraphQLDirective,
-  GraphQLEnumType,
-  GraphQLFloat,
-  GraphQLID,
-  GraphQLIncludeDirective,
-  GraphQLInputObjectType,
-  GraphQLInt,
-  GraphQLInterfaceType,
-  GraphQLList,
-  GraphQLObjectType,
-  GraphQLSchema,
-  GraphQLSkipDirective,
-  GraphQLString,
-  GraphQLUnionType,
-} from 'graphql';
+import { GraphQLID, GraphQLList, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
 
 export const Film: GraphQLObjectType = new GraphQLObjectType({
   name: 'Film',

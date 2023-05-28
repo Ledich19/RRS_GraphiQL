@@ -7,7 +7,7 @@ import LinkBtn from '../../components/LinkBtn/LinkBtn';
 
 const Welcome = () => {
   const [user] = useAuthState(auth);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className={s.welcome}>
       <UserInfo />
