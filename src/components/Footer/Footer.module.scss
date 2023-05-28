@@ -26,11 +26,12 @@ $visitedColor: #ffd700;
 .rsschool {
   width: 120px;
   height: 50px;
-  background-image: url('./img/rss.svg');
+  background-image: url('./../../assets/logo/rss.svg');
   background-repeat: no-repeat;
 }
 .year {
   font-family: 'OldEnglish';
+  color: white;
   font-size: 1.5rem;
 }
 .authors {
