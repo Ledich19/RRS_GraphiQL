@@ -57,7 +57,7 @@ const Register = () => {
         onBlur={() => name.onBlur()}
         placeholder="Full Name"
       />
-      {email.error && <div className={s.error}> {email.error} </div>}
+      {email.error && email.isDirty && <div className={s.error}> {email.error} </div>}
       <input
         type="text"
         className={s.textBox}
@@ -66,7 +66,7 @@ const Register = () => {
         onBlur={() => email.onBlur()}
         placeholder="E-mail Address"
       />
-      {password.error && <div className={s.error}> {password.error} </div>}
+      {password.error && password.isDirty && <div className={s.error}> {password.error} </div>}
       <input
         type="password"
         className={s.textBox}

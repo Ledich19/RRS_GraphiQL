@@ -15,7 +15,14 @@ const App = () => {
   return (
     <Routes>
       <Route path="*" element={<Layout />}>
-        <Route index element={<Welcome />} />
+        <Route
+          index
+          element={
+            <Suspense fallback={<Spinner />}>
+              <Welcome />
+            </Suspense>
+          }
+        />
         <Route path="auth" element={<RegisterPage />}>
           <Route
             path="sign-in"
