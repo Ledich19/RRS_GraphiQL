@@ -11,7 +11,7 @@ const RegisterPage = () => {
   useEffect(() => {
     if (loading) return;
     if (user) {
-      navigate('/');
+      navigate('/editor');
     }
   }, [user, loading, navigate]);
 

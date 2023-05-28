@@ -13,12 +13,12 @@ const Login = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const { t } = useTranslation();
+
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
-    if (user) navigate('/app');
+    if (user) navigate('/editor');
   }, [user, loading, navigate]);
 
   return (
